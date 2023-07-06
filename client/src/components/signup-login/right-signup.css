@@ -1,0 +1,82 @@
+.signup-login{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 100px;
+  width: 50%;
+  gap: 80px;
+}
+
+.heading{
+  font-size: 30px;
+  > span{
+    color: rgb(94, 21, 21);
+  }
+}
+
+.textarea{
+  width: 350px;
+}
+
+.textarea ul{
+    list-style-type: none; 
+    padding: 0px;  
+ }
+
+.textarea ul input{
+    background-color: var(--color-whitesmoke-400);
+    width: 350px;
+    height: 40px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    color: rgb(12, 12, 12);
+    border: none;
+    outline: none;
+    overflow: auto;
+    padding: 0px 15px;
+}
+
+.textarea input::placeholder {
+  color: rgb(0, 0, 0);
+  opacity: 1; /* Firefox */
+}
+
+.textarea .role{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    > .role-options{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+
+button{
+  padding: 8px 30px;
+  font-size: 27px;
+  font-weight: 600;
+  width: 200px;
+  color: white;
+  border-radius: 50px;
+  border: 1px solid black;
+  background-color: black;
+}
+
+.already-acc{
+  display:none;
+}
+
+@media only screen and (max-width: 800px) {
+  .signup-login {
+    width: 100%;
+    align-items: center;
+    padding: 50px;
+    gap: 65px;
+  }
+  .already-acc{
+    margin-top: 0px;
+    display: block;
+  }
+}

@@ -1,0 +1,17 @@
+.signup-login-parent {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .signup-login-parent {
+    flex-direction: column;
+    align-items: center;
+  }
+}
