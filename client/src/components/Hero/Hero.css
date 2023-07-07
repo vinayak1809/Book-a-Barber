@@ -1,0 +1,140 @@
+.section-title {
+  position: relative;
+  line-height: 64px;
+  font-weight: 800;
+  display: inline-block;
+  width: 100%;
+}
+.rectangle-icon {
+  position: relative;
+  width: 533px;
+  height: 963px;
+  object-fit: cover;
+}
+.phone-mockup {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.feature-icon-with-circle {
+  position: relative;
+  border-radius: var(--br-81xl);
+  width: 72px;
+  height: 72px;
+}
+.description,
+.headline {
+  position: relative;
+  display: inline-block;
+  width: 428px;
+}
+.headline {
+  line-height: 32px;
+  font-weight: 600;
+}
+.description {
+  font-size: var(--body-body-1-size);
+  line-height: 26px;
+}
+.details,
+.div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.details {
+  overflow: hidden;
+  flex-direction: column;
+  gap: var(--gap-5xs);
+}
+.div {
+  border-radius: var(--br-5xs);
+  flex-direction: row;
+  gap: var(--gap-21xl);
+}
+.content,
+.features-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.features-list {
+  width: 100%;
+  overflow: hidden;
+  flex-direction: column;
+  gap: var(--gap-29xl);
+}
+.content {
+  flex-direction: row;
+  gap: var(--gap-13xl);
+  text-align: left;
+  font-size: var(--heading-h5-size);
+}
+.feature-multiple-9,
+.section-title-parent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-title-parent {
+  justify-content: center;
+  gap: var(--gap-29xl);
+  text-align: center;
+  font-size: var(--font-size-45xl);
+  color: var(--text-gray-900);
+  font-family: var(--body-body-1);
+}
+.feature-multiple-9 {
+  background-color: var(--default-white);
+  padding: var(--padding-45xl) 0;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 420px) {
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+.section-title-parent {
+  flex-direction: column;
+  width: 100%;
+}
+}
+
+@media screen and (max-width: 660px) {
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .section-title-parent {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .section-title-parent {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .rectangle-icon {
+    width: 500px;
+    height: 900px;
+  }
+  .content {
+    gap: var(--gap-13xl);
+  }
+}
