@@ -1,9 +1,21 @@
 import "./left-signup.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { useroptionLogin } from "../../features/user/optionSlice";
 
-const LeftSide = () => {
-  const [login,setLogin] = useState(true); 
+const LeftSideSignUp = () => {
+  const [login,setLogin] = useState(); 
+  const dispatch = useDispatch();
 
+  const userOption = useSelector(state => state.userOption.login);
+ 
+  useEffect(() => {
+    setLogin(userOption);
+  }, [userOption]);
+
+  const changeOption = () =>{
+    dispatch(useroptionLogin(!login))  
+  }
   return (
     <div className="left-side">
       <section className="frame-parent" id="aside">
@@ -21,8 +33,8 @@ const LeftSide = () => {
         </div>
         <div className="sign-in-wrapper">
           {login ? 
-            <button className="sign-in">Register </button> :
-            <button className="sign-in">Sign In</button>
+            <button onClick={()=>{ changeOption() }} className="sign-in">Register </button> :
+            <button onClick={()=>{ changeOption() }} className="sign-in">Sign In</button>
           }
         </div>
       </section>
@@ -30,4 +42,4 @@ const LeftSide = () => {
   );
 };
 
-export default LeftSide;
+export default LeftSideSignUp;
