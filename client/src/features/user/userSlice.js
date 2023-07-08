@@ -13,9 +13,31 @@ const initialState = {
 export const createUser = createAsyncThunk(
   "user/PostUserDetails",
   async (userDetails) => {
-    console.log(userDetails, "userDetails");
-    const user = await axios.post("/registerUser", userDetails);
-    return user;
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/registerUser",
+        userDetails
+      );
+      return response.data;
+    } catch (error) {
+      throw error; //
+    }
+  }
+);
+
+export const checkUser = createAsyncThunk(
+  "user/checkUserDetails",
+  async (userDetails) => {
+    console.log(userDetails);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/checkUser",
+        userDetails
+      );
+      return response;
+    } catch (error) {
+      throw error; //
+    }
   }
 );
 
@@ -25,6 +47,10 @@ export const userSlice = createSlice({
   extraReducers: {
     [createUser.fulfilled]: (state, action) => {
       return;
+    },
+    [checkUser.fulfilled]: (state, action) => {
+      console.log(action.payload.data, "aaa");
+      return { ...action.payload.data };
     },
   },
 });

@@ -26,7 +26,7 @@ const Header = () => {
         <div className="nav-items" id="navbarRightSide">
           <ul>
               {links.map((link,index) => (
-                <Link key={index} to={link.path} exact activeClassName="current">
+                <Link key={index} to={link.path}>
                   <li>{link.name}</li>
                 </Link>
               ))}

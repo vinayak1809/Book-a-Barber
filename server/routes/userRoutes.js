@@ -1,5 +1,11 @@
+
+
 const express = require("express");
 const router = express.Router();
-import { registerUser } from "../controllers/userController";
+const registerUser = require("../controllers/userController");
 
-router.route("/register").post(registerUser);
+router.route("/registerUser").post(registerUser.registerUser);
+router.route("/checkUser").post(registerUser.checkUser);
+//router.route("/user").get("ddddddd");
+
+module.exports = router;
