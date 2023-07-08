@@ -2,7 +2,7 @@ import "./right-signup.css";
 import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { useroptionLogin } from "../../features/user/optionSlice";
-import { createUser } from "../../features/user/userSlice";
+import { createUser,checkUser } from "../../features/user/userSlice";
 
 const RightSideSignUp = () => {
   
@@ -25,15 +25,21 @@ const RightSideSignUp = () => {
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [role,setRole] = useState("");
     
     const pushData = (e) =>{
       e.preventDefault();
       const userDetails = {
-        name:name,
+        fullname:name,
         email:email,
-        password:password
+        password:password,
+        role:role
       }
-     dispatch(createUser(userDetails));
+      if (!login){
+        dispatch(createUser(userDetails));
+      }else{
+        dispatch(checkUser(userDetails));
+      }
     }
   return (
     <div className="signup-login">
@@ -45,39 +51,40 @@ const RightSideSignUp = () => {
       <form action="" onSubmit={(e)=>pushData(e)}>
         <div className="textarea">
           <ul>
-
+          {!login && 
             <input
             type="text" name="name" id="name" 
             placeholder={"Name :"}
             onChange={(e) => setName(e.target.value)}
             ></input>
 
-            {!login && 
+          }
             <input type="email" name="email" id="email" placeholder={"Email :"}
             onChange={(e) => setEmail(e.target.value)}>
-            </input>}
+            </input>
             
             <input type="password" name="password" id="password" placeholder={"Password :"}
             onChange={(e) => setPassword(e.target.value)}>
             </input>
 
           </ul>
+          {!login && 
           <div className="role">
             <label name="">Role:</label>
             <div className="role-options">
 
               <div className="role-option-1">
-                <input type="radio" name="role" value="Barber"/>
+                <input type="radio" name="role" onChange = {(e) => setRole(e.target.value)} value="Barber"/>
                 <label name="">Barber</label>
               </div>
 
               <div className="role-option-2">
-                <input type="radio" name="role" value="user"/>
+                <input type="radio" name="role" onChange = {(e) => setRole(e.target.value)} value="user"/>
                 <label name="">User</label>
               </div>
               
             </div>
-          </div>
+          </div>}
         </div>
 
         {login ?
