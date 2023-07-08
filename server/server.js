@@ -3,12 +3,23 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 <<<<<<< Updated upstream
 const mongoose = require("mongoose");
+
 const app = express();
 
-app.listen(4000);
+const URI = "mongodb://localhost:27017/Book-a-barber";
+mongoose
+  .connect(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(4000);
+    console.log("Database Connected!!");
+  })
+  .catch((err) => {
+    if (err) throw err;
+  });
 
-app.use(express.static(path.join(__dirname, "/api/server/public")));
-app.use(bodyParser.json());
 app.use(cors());
 
 dotenv.config();
