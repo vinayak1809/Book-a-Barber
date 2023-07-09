@@ -7,6 +7,8 @@ const registerUser = async (req, res, next) => {
   //const user = await User.create();
 };
 
+//bcrypt setup then rest of ui
+
 const checkUser = async (req, res, next) => {
   const { email, password } = req.body;
   User.find({ email: email }).then((user) => {
@@ -15,4 +17,3 @@ const checkUser = async (req, res, next) => {
 };
 
 module.exports = { registerUser, checkUser };
-
