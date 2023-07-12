@@ -22,9 +22,6 @@ export const userOptionSlice = createSlice({
     [useroptionLogin.fulfilled]: (state, action) => {
       state.login = action.payload;
     },
-    //[useroptionLogin.pending]: (state, action) => {
-    //  console.log("prending");
-    //},
   },
 });
 
