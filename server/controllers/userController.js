@@ -10,7 +10,7 @@ const registerUser = async (req, res, next) => {
 
 const checkUser = async (req, res, next) => {
   const { email, password } = req.body;
-  User.find({ email: email }).then((user) => {
+  await User.find({ email: email }).then((user) => {
     res.json(user[0]);
   });
 };

@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 //
 app.use(require("./routes/userRoutes"));
+app.use(require("./routes/barberRoutes"));
+app.use(require("./routes/servicesRoutes"));
 
 dotenv.config();
 

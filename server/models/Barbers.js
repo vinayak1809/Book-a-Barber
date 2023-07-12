@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
-
-const { Schema } = new mongoose();
+const { Schema } = mongoose;
 
 const BarbersSchema = new Schema({
+  userID: {
+    type: mongoose.Types.ObjectId,
+    ref: "user",
+  },
   name: {
     type: String,
     required: true,
@@ -21,7 +24,7 @@ const BarbersSchema = new Schema({
   bio: {
     type: String,
     required: true,
-    maxlength: 25,
+    maxlength: 500,
     trim: true,
   },
   location: {
@@ -30,9 +33,11 @@ const BarbersSchema = new Schema({
     maxlength: 25,
     trim: true,
   },
-  ServicesOffered: {
-    type: String,
-  },
+  ServicesOffered: [
+    {
+      type: String,
+    },
+  ],
   ratings: {
     type: String,
   },
@@ -41,4 +46,11 @@ const BarbersSchema = new Schema({
   },
 });
 
-module.exports = mongoose.Schema("barbers", BarbersSchema);
+module.exports = mongoose.model("barbers", BarbersSchema);
+
+//BarbersSchema.add({
+//  userID: {
+//    type: mongoose.Types.ObjectId,
+//    ref: "user",
+//  },
+//});
