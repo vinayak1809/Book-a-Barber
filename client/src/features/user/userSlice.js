@@ -28,7 +28,6 @@ export const createUser = createAsyncThunk(
 export const checkUser = createAsyncThunk(
   "user/checkUserDetails",
   async (userDetails) => {
-    console.log(userDetails);
     try {
       const response = await axios.post(
         "http://localhost:4000/checkUser",
@@ -49,8 +48,7 @@ export const userSlice = createSlice({
       return;
     },
     [checkUser.fulfilled]: (state, action) => {
-      console.log(action.payload.data, "aaa");
-      return { ...action.payload.data };
+      return [...state, action.payload.data.salons];
     },
   },
 });

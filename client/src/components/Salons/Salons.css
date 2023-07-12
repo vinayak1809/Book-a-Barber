@@ -1,0 +1,41 @@
+.salons ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0;
+    grid-template-rows: 1fr;
+    list-style-type:none;
+    justify-items: center;
+    width: 100%;
+}
+
+.salons ul li{
+    width: 300px;
+    background-color: antiquewhite;
+}
+
+img{
+    width: 300px;
+    height: 300px;
+}
+
+@media screen and (max-width: 1160px) {
+    .salons ul{
+        grid-template-columns: 1fr 1fr;
+        place-content: center;
+    }
+  }
+
+
+@media screen and (max-width: 860px) {
+    .salons ul{
+        grid-template-columns: 1fr ;
+    }
+    
+  }
+
+@media screen and (max-width: 560px) {
+    .salons ul{
+        grid-template-columns: 1fr ;
+    }
+    
+  }
