@@ -2,13 +2,23 @@ import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { Salons } from "../../components/Salons/Salons";
 import "./SalonsPage.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllSalonsDetails,
+  getSalonsForChosedService,
+} from "../../features/Salons/salonsSlice";
 
 export const SalonsPage = () => {
+  const dispatch = useDispatch();
   const [service, setService] = useState("");
+  const { salons } = useSelector((state) => state.salons);
 
   useEffect(() => {
-    //load service
-    // console.log(service);
+    if (service == "All" || service == "") {
+      dispatch(getAllSalonsDetails());
+    } else {
+      dispatch(getSalonsForChosedService(service));
+    }
   }, [service]);
 
   return (
@@ -16,29 +26,20 @@ export const SalonsPage = () => {
       <Header />
       <div className="salons-page">
         <div className="category">
-          <label htmlFor="cars">Choose a Service :</label>
-          <select name="cars" id="cars">
-            <option
-              onChange={(e) => setService(e.target.value)}
-              value="Haircut"
-            >
-              Haircut
-            </option>
-            <option onChange={(e) => setService(e.target.value)} value="Beard">
-              Beard
-            </option>
-            <option onChange={(e) => setService(e.target.value)} value="Facial">
-              Facial
-            </option>
-            <option
-              onChange={(e) => setService(e.target.value)}
-              value="Massage"
-            >
-              Massage
-            </option>
+          <label htmlFor="services">Choose a Service :</label>
+          <select
+            name="services"
+            id="services"
+            onChange={(e) => setService(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Haircut">Haircut</option>
+            <option value="Beard">Beard</option>
+            <option value="Facial">Facial</option>
+            <option value="Massage">Massage</option>
           </select>
         </div>
-        <Salons />
+        <Salons salons={salons} />
       </div>
     </>
   );

@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/salons" element={<SalonsPage />} />
           <Route path="/signup" element={<SignUpLogin />} />
-          <Route path="/salons/:salonName" element={<Salon />} />
+          <Route path="/salons/:salonName/:salonID" element={<Salon />} />
         </Routes>
       </BrowserRouter>
     </div>

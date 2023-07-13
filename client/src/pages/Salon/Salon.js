@@ -9,14 +9,14 @@ import { getSpecificSalonServices } from "../../features/services/servicesSlice"
 import "./Salon.css";
 
 export const Salon = () => {
-  const { salonName } = useParams();
+  const { salonName, salonID } = useParams();
   const dispatch = useDispatch();
   const { salons } = useSelector((state) => state.salons);
   const { services } = useSelector((state) => state.services);
 
   useEffect(() => {
     dispatch(getSpecificSalonDetails(salonName));
-    dispatch(getSpecificSalonServices("64ac518a07b9a6fadf2d53fc"));
+    dispatch(getSpecificSalonServices(salonID));
   }, [dispatch]);
 
   return (

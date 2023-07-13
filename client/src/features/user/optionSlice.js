@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export const useroptionLogin = createAsyncThunk(
-  "user/optionLogin",
+  "user/optionLogin", //type name
   async (options) => {
     if (!options) {
       return false;

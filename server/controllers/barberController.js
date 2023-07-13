@@ -1,8 +1,6 @@
 const Barber = require("../models/Barbers");
 
 const registerSalon = async (req, res, next) => {
-  //console.log({ ...req.body });
-
   const salon = await new Barber({ ...req.body });
   salon.save();
   res.json({ done: true });
@@ -19,4 +17,16 @@ const getSpecificSalonDetails = async (req, res, next) => {
 
   res.json({ salons: salon });
 };
-module.exports = { registerSalon, getAllSalonDetails, getSpecificSalonDetails };
+
+const getSalonsForChossedService = async (req, res) => {
+  const category = req.params.category;
+  const salon = await Barber.find({ ServicesOffered: category });
+
+  res.json({ salons: salon });
+};
+module.exports = {
+  registerSalon,
+  getAllSalonDetails,
+  getSpecificSalonDetails,
+  getSalonsForChossedService,
+};

@@ -18,7 +18,7 @@ const initialState = {
 //
 
 export const getAllSalonsDetails = createAsyncThunk(
-  "salons/getAllSalonsDetails",
+  "salons/getAllSalonsDetails", //type name
   async () => {
     try {
       const response = await axios.get(
@@ -42,7 +42,22 @@ export const getSpecificSalonDetails = createAsyncThunk(
 
       return response;
     } catch (error) {
-      throw error; //
+      throw error;
+    }
+  }
+);
+
+export const getSalonsForChosedService = createAsyncThunk(
+  "salons/getSalonsForChosedService",
+  async (category) => {
+    try {
+      console.log(category, "Aaaaaaaaaaaaa");
+      const response = await axios.get(
+        `http://localhost:4000/get-salons-for-choosed-service/${category}`
+      );
+      return response;
+    } catch (error) {
+      throw error;
     }
   }
 );
@@ -55,6 +70,9 @@ export const salonsSlice = createSlice({
       return { ...action.payload.data };
     },
     [getSpecificSalonDetails.fulfilled]: (state, action) => {
+      return { ...action.payload.data };
+    },
+    [getSalonsForChosedService.fulfilled]: (state, action) => {
       return { ...action.payload.data };
     },
   },
