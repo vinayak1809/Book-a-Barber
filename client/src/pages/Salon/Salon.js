@@ -1,24 +1,36 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSpecificSalonDetails } from "../../features/Salons/salonsSlice";
+import { getSpecificSalonDetails_SalonName } from "../../features/Salons/salonsSlice";
 import { getSpecificSalonServices } from "../../features/services/servicesSlice";
+import Services from "../../components/Services/Services";
 
 import "./Salon.css";
 
 export const Salon = () => {
-  const { salonName, salonID } = useParams();
   const dispatch = useDispatch();
+  const { salonName } = useParams();
+
   const { salons } = useSelector((state) => state.salons);
   const { services } = useSelector((state) => state.services);
 
   useEffect(() => {
-    dispatch(getSpecificSalonDetails(salonName));
-    dispatch(getSpecificSalonServices(salonID));
-  }, [dispatch]);
+    const fetchSalonDetails = async () => {
+      await dispatch(getSpecificSalonDetails_SalonName(salonName));
+    };
 
+    if (salonName) {
+      fetchSalonDetails();
+    }
+  }, [dispatch, salonName]);
+
+  useEffect(() => {
+    if (salons.length > 0) {
+      dispatch(getSpecificSalonServices(salons[0]._id));
+    }
+  }, [dispatch, salons]);
   return (
     <>
       <Header />
@@ -33,21 +45,7 @@ export const Salon = () => {
           <p>{salons[0].bio}</p>
         </div>
         <div className="services">
-          <h3>Services</h3>
-          <ul>
-            {services.map((link, index) => (
-              <li>
-                <div>
-                  <img src={`/${link.image}`}></img>
-                </div>
-                <div className="service-info">
-                  <h3>{link.name}</h3>
-                  <p>{link.price}</p>
-                </div>
-                <button>Book a Appointment</button>
-              </li>
-            ))}
-          </ul>
+          <Services services={services} />
         </div>
       </main>
     </>

@@ -5,6 +5,7 @@ const BarbersSchema = new Schema({
   userID: {
     type: mongoose.Types.ObjectId,
     ref: "user",
+    required: true,
   },
   name: {
     type: String,
@@ -47,7 +48,7 @@ const BarbersSchema = new Schema({
 });
 
 module.exports = mongoose.model("barbers", BarbersSchema);
-
+// for above situation what i am considering is: i will create a field where publish {true/false} if wants to publish he can / he can the info to the draft but before publishing it barber have to enter every info to the database
 //BarbersSchema.add({
 //  userID: {
 //    type: mongoose.Types.ObjectId,

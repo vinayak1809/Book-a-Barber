@@ -41,6 +41,7 @@ const RightSideSignUp = () => {
         dispatch(checkUser(userDetails));
       }
     }
+    
   return (
     <div className="signup-login">
       <div className="heading">

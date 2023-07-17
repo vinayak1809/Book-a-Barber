@@ -48,7 +48,7 @@ export const userSlice = createSlice({
       return;
     },
     [checkUser.fulfilled]: (state, action) => {
-      return [...state, action.payload.data.salons];
+      return { ...action.payload.data };
     },
   },
 });

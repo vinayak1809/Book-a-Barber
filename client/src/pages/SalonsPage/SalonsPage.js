@@ -11,6 +11,7 @@ import {
 export const SalonsPage = () => {
   const dispatch = useDispatch();
   const [service, setService] = useState("");
+  const { user } = useSelector((state) => state);
   const { salons } = useSelector((state) => state.salons);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export const SalonsPage = () => {
             <option value="Massage">Massage</option>
           </select>
         </div>
-        <Salons salons={salons} />
+        <Salons user={user} salons={salons} />
       </div>
     </>
   );

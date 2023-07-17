@@ -1,0 +1,18 @@
+
+.services ul{
+    display: flex;
+    list-style-type: none;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.service-info{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+
+button{
+    width: 250px;
+    font-size: 15px;
+}

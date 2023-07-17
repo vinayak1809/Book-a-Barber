@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import "./Salons.css";
 
+
 export const Salons = (props) => {
-  const { salons } = props;
+  const { salons,user } = props;
+ 
   return (
+
     <div className="salons">
         <ul>
         {
           salons.map((link,index) => (
-                    
-            <Link key={index} to={`${link.name}/${link._id}`}>
+            <Link key={index} to={user._id ? `/Salon/${user.fullname}/${link.name}` :`/Salon/${link.name}`}  state={{ salonID: link._id}} >
                 <li key={index}>
                     <div className="img-section">
                         <img src={link.logo} alt="" />
@@ -22,6 +24,7 @@ export const Salons = (props) => {
                     </div>
                 </li>
             </Link> 
+
            ))          
         }
         </ul>

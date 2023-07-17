@@ -1,0 +1,14 @@
+.barber-home{
+    position: relative;
+    background-image: url(/public/Barber-bg-1.png);
+    width: 100%;
+    height: 662px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
