@@ -14,6 +14,7 @@ app.use(cors());
 app.use(require("./routes/userRoutes"));
 app.use(require("./routes/barberRoutes"));
 app.use(require("./routes/servicesRoutes"));
+app.use(require("./routes/appointmentRoutes"));
 
 dotenv.config();
 
