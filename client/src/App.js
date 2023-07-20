@@ -12,6 +12,7 @@ import BarberHome from "./pages/Barber-Home/BarberHome";
 import { useSelector } from "react-redux";
 import RegisterSalon from "./pages/Register-Salon/RegisterSalon";
 import AddService from "./pages/Add-Service/AddService";
+import { DatePayment } from "./pages/Date-Payment/DatePayment";
 
 function App() {
   const { user } = useSelector((state) => state);
@@ -30,6 +31,10 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path={`/Salon/:username/:salonName`} element={<Salon />} />
               <Route path="/Salons" element={<SalonsPage />} />
+              <Route
+                path={`/Salon/:username/:salonName/select-date`}
+                element={<DatePayment />}
+              />
             </>
           ) : (
             <>

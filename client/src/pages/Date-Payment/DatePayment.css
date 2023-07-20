@@ -1,0 +1,29 @@
+.date-payment{
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    padding: 50px 5%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card{
+    width: 00px;
+    background-color: rgb(189, 187, 187);
+    margin: 0px;
+}
+.service-side{
+    width: 50%;
+}
+
+.date-side{
+    width: 50%;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .date-payment {
+      flex-direction: column;
+      align-items: center;
+    }
+  }

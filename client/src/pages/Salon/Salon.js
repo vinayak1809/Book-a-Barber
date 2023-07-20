@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSpecificSalonDetails_SalonName } from "../../features/Salons/salonsSlice";
@@ -31,6 +31,7 @@ export const Salon = () => {
       dispatch(getSpecificSalonServices(salons[0]._id));
     }
   }, [dispatch, salons]);
+
   return (
     <>
       <Header />
@@ -45,7 +46,7 @@ export const Salon = () => {
           <p>{salons[0].bio}</p>
         </div>
         <div className="services">
-          <Services services={services} />
+          <Services salonName={salons[0].name} services={services} />
         </div>
       </main>
     </>
