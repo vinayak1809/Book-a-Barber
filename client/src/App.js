@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import RegisterSalon from "./pages/Register-Salon/RegisterSalon";
 import AddService from "./pages/Add-Service/AddService";
 import { DatePayment } from "./pages/Date-Payment/DatePayment";
+import BookedAppointment from "./pages/Booked-Appointment/Booked";
 
 function App() {
   const { user } = useSelector((state) => state);
@@ -34,6 +35,10 @@ function App() {
               <Route
                 path={`/Salon/:username/:salonName/select-date`}
                 element={<DatePayment />}
+              />
+              <Route
+                path={"/booked-appointment"}
+                element={<BookedAppointment />}
               />
             </>
           ) : (
