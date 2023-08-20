@@ -1,4 +1,4 @@
-form{
+form.registration-salon-form{
     box-sizing: border-box;
     width: 100%;
     padding: 70px 10%;
@@ -41,7 +41,7 @@ label::after{
     white-space: pre;
 }
 
-button{
+.reg-btn{
    margin: 30px;
 }
 

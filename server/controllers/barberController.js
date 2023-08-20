@@ -13,16 +13,16 @@ const getAllSalonDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 const getSpecificSalonDetails_ID = catchAsyncErrors(async (req, res) => {
+  console.log(req.user);
   const userID = req.params.userID;
   const salon = await Barber.find({ userID: userID });
-  res.json({ salons: salon });
+  res.json({ currentSalon: salon });
 });
 
 const getSpecificSalonDetails_SalonName = catchAsyncErrors(async (req, res) => {
   const salonName = req.params.salonName;
-  console.log(salonName, "ssdsdsd");
   const salon = await Barber.find({ name: salonName });
-  res.json({ salons: salon });
+  res.json({ currentSalon: salon });
 });
 
 const getSalonsForChossedService = catchAsyncErrors(async (req, res) => {

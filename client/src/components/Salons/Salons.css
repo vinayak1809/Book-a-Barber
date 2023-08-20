@@ -1,4 +1,73 @@
-.salons ul{
+
+.all-salons{
+    width: 80%;
+    min-height: 100vh;
+    text-decoration: inherit;
+}
+
+.all-salons ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-around;
+    align-items:center;
+    text-decoration: inherit;
+}
+
+.all-salons ul li{
+    margin: 0 0 30px 0;
+    width: 250px;
+    height: 330px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.all-salons ul li .salon-name{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 20px;
+    box-shadow: 0 8px 8px -8px rgb(214, 218, 219);
+    color: black;    
+
+}
+
+.all-salons ul li .service-name{
+    padding: 0px 20px;
+    color: black;
+}
+
+.all-salons ul li .salon-description{
+    padding: 0px 20px;
+    color: rgb(155, 154, 154);
+}
+
+.all-salons ul li img{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 250px;
+    height: 200px;
+}
+
+
+@media (max-width:767px) {
+    .all-salons{
+        width: 100%;
+    }
+        
+    .all-salons ul{
+        flex-direction: row;
+    
+        align-items: center;
+    }
+    
+    .all-salons ul li{
+        margin-bottom: 30px;
+    }
+}
+
+/*.salons ul{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 0;
@@ -9,13 +78,13 @@
 }
 
 .salons ul li{
-    width: 300px;
+    width: 200px;
     background-color: antiquewhite;
 }
 
 img{
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
 }
 
 @media screen and (max-width: 1160px) {
@@ -39,3 +108,5 @@ img{
     }
     
   }
+
+  */

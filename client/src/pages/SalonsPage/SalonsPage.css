@@ -1,7 +1,30 @@
+.top2{
+    background-color: #FFB700;
+    padding: 20px 0px ;
+}
+
 .salons-page{
+    padding-top: 80px;
+    background-color: #FFB700;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     width: 80%;
-    gap: 80px;
-    margin: 50px auto;
+    margin: auto;
+}
+
+.category{
+    width:20%
+}
+
+@media (max-width:767px) {
+
+    .salons-page{
+        flex-direction: column;
+    }
+
+    .category{
+        width:100%
+    }
+    
 }

@@ -1,27 +1,99 @@
 .left-side {
-  background-color: var(--color-whitesmoke-300);
+  background-color: #FFB700;
   width: 50%;
-  height: 700px;
-  flex-direction: row;
-  padding: var(--padding-91xl) var(--padding-96xl);
+  height: 100%;
+  padding: 91px 80px;
   box-sizing: border-box;
-  justify-content: flex-end;
 }
+
 .frame-parent {
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 150px;
-  text-align: center;
-  font-size: var(--font-size-31xl);
-  color: var(--color-dimgray);
-  font-family: var(--font-jost);
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
 }
+
 .bookabarber-parent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-5xs);
+  gap: 5px;
+}
+
+.frame-parent .dash {
+  position: relative;
+  border-top: 1.5px solid rgb(116, 114, 114);
+  width: 280px;
+  height: 1px;
+}
+
+.frame-parent .title{
+  font-size: 2.1em;
+  font-weight:600;
+  color: #b83400;
+  >.barber{
+    color: black;
+  }
+}
+
+.frame-parent .tagline{
+  width: 300px;
+  font-size: 1.4em;
+}
+
+.sign-in-wrapper{
+  margin-top: 150px;
+}
+
+.sign-in-wrapper button {
+  cursor: pointer;
+  border: 0;
+  padding: 10px 30px;
+  font-size: 1.0em;
+  background-color:black;
+  color: white;
+  border-radius: 30px;
+  flex-direction: row;
+  box-sizing: border-box;
+  justify-content: center;
+  width: 130px;
+}
+
+@media only screen and (max-width: 800px) {
+  .left-side {
+  width: 100%;
+  display: none;
+  }
+}
+/*.left-side {
+  background-color: #FFB700;
+  width: 50%;
+  height: 700px;
+  flex-direction: row;
+  padding: 91px 96px ;
+  box-sizing: border-box;
+  justify-content: flex-end;
+}
+
+.frame-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 150px;
+  text-align: center;
+  font-size: 31px;
+  color: rgb(141, 12, 12);
+  font-family:'Courier New', Courier, monospace;
+}
+
+.bookabarber-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .bookabarber {
@@ -34,25 +106,25 @@
   flex-shrink: 0;
 }
 .barber {
-    color: var(--color-black);
+    color: black;
 }
 .bookabarber-txt {
-  line-break: anywhere;
+  line-break: 'Courier New', Courier, monospace;
   width: 100%;
 }
 .frame-child {
   position: relative;
-  border-top: 3px solid var(--color-black);
+  border-top: 3px solid black;
   box-sizing: border-box;
   width: 344.41px;
   height: 3px;
 }
 .your-style-your {
   position: relative;
-  font-size: var(--font-size-11xl);
+  font-size: 11px;
   line-height: 115.5%;
   font-weight: 500;
-  color: var(--color-black);
+  color: black;
   text-align: left;
   display: flex;
   align-items: center;
@@ -64,21 +136,21 @@
 .sign-in-wrapper {
   cursor: pointer;
   border: 0;
-  padding: var(--padding-3xs);
-  background-color: var(--color-black);
-  border-radius: var(--br-31xl);
+  padding: 3px;
+  background-color:black;
+  border-radius: 30px;
   flex-direction: row;
   box-sizing: border-box;
   justify-content: center;
 }
 
-button {
+.sign-in {
   position: relative;
-  font-size: var(--font-size-17xl);
+  font-size: 17px;
   line-height: 122.5%;
   font-weight: 600;
-  font-family: var(--font-jost);
-  color: var(--default-white);
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
   text-align: center;
   width: 197px;
   height: 60px;
@@ -99,3 +171,4 @@ button {
     display: none;
   }
 }
+*/

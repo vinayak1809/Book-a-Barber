@@ -2,17 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  salons: [
-    {
-      _id: "",
-      userID: "",
-      name: "",
-      logo: "",
-      contactInformation: "",
-      bio: "",
-      location: "",
-    },
-  ],
+  salons: [],
+  currentSalon: {},
 };
 
 export const registerSalon = createAsyncThunk(
@@ -33,8 +24,7 @@ export const getAllSalonsDetails = createAsyncThunk(
       const response = await axios.get(
         "http://localhost:4000/get-all-salons-details"
       );
-
-      return response;
+      return response.data;
     } catch (error) {
       throw error; //
     }
@@ -47,10 +37,11 @@ export const getSpecificSalonDetails_ID = createAsyncThunk(
     try {
       //changed to salonName from userID
       const response = await axios.get(
-        `http://localhost:4000/get-specific-salon-details-ID/${userID}`
+        `http://localhost:4000/get-specific-salon-details-ID/${userID}`,
+        { withCredentials: true }
       );
 
-      return response;
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -63,10 +54,11 @@ export const getSpecificSalonDetails_SalonName = createAsyncThunk(
     try {
       //changed to salonName from userID
       const response = await axios.get(
-        `http://localhost:4000/get-specific-salon-details-salonName/${salonName}`
+        `http://localhost:4000/get-specific-salon-details-salonName/${salonName}`,
+        { withCredentials: true }
       );
 
-      return response;
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -80,7 +72,7 @@ export const getSalonsForChosedService = createAsyncThunk(
       const response = await axios.get(
         `http://localhost:4000/get-salons-for-choosed-service/${category}`
       );
-      return response;
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -92,16 +84,16 @@ export const salonsSlice = createSlice({
   initialState,
   extraReducers: {
     [getAllSalonsDetails.fulfilled]: (state, action) => {
-      return { ...action.payload.data };
+      return { ...state, ...action.payload };
     },
     [getSpecificSalonDetails_ID.fulfilled]: (state, action) => {
-      return { ...action.payload.data };
+      return { ...state, ...action.payload };
     },
     [getSalonsForChosedService.fulfilled]: (state, action) => {
-      return { ...action.payload.data };
+      return { ...state, ...action.payload };
     },
     [getSpecificSalonDetails_SalonName.fulfilled]: (state, action) => {
-      return { ...action.payload.data };
+      return { ...state, ...action.payload };
     },
   },
 });

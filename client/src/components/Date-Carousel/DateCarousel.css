@@ -1,0 +1,44 @@
+.date-carousel{
+    position: relative;
+    overflow: hidden;
+    padding: 26px;
+}
+
+.date-container{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+
+}
+
+.pre-btn,.next-btn{
+    border: none;
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0);
+}
+.next-btn{
+    right: 0;
+}
+
+.pre-btn p,.next-btn p{
+    font-size: 50px;
+    background-color: rgba(0,0,0,0.436);
+    border-radius: 10px;
+    color: white;
+}
+
+.book-btn button{
+    margin-top: 80px;
+    padding:5px 20px;
+    border: none;
+    font-size: 1.0em;
+}

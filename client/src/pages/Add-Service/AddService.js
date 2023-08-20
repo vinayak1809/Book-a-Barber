@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
 import "./AddService.css";
-import { useDispatch, useSelector } from "react-redux";
 import Services from "../../components/Services/Services";
+
 import { registerService } from "../../features/services/servicesSlice";
 import { getSpecificSalonServices } from "../../features/services/servicesSlice";
 
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 const AddService = () => {
-  const { user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.user);
   const { services } = useSelector((state) => state.services);
   const { salons } = useSelector((state) => state.salons);
 
@@ -19,7 +21,7 @@ const AddService = () => {
 
   useEffect(() => {
     dispatch(getSpecificSalonServices(salons[0]._id));
-  }, []);
+  }, [dispatch]);
 
   const pushData = (e) => {
     e.preventDefault();

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
 import "./BarberHome.css";
 import Header from "../../components/Header/Header";
 import RegisterSalon from "../Register-Salon/RegisterSalon";
+import { getSpecificSalonDetails_ID } from "../../features/Salons/salonsSlice";
+
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getSpecificSalonDetails_ID } from "../../features/Salons/salonsSlice";
 import { useDispatch } from "react-redux";
 
 const BarberHome = () => {
@@ -16,7 +17,7 @@ const BarberHome = () => {
     if (user._id) {
       dispatch(getSpecificSalonDetails_ID(user._id));
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   return (
     <>

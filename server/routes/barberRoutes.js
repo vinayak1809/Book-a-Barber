@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isAuthenticatedUser } = require("./../middleware/auth");
 
 const {
   registerSalon,
@@ -14,11 +15,11 @@ router.route("/get-all-salons-details").get(getAllSalonDetails);
 
 router
   .route("/get-specific-salon-details-ID/:userID")
-  .get(getSpecificSalonDetails_ID);
+  .get(isAuthenticatedUser, getSpecificSalonDetails_ID);
 
 router
   .route("/get-specific-salon-details-salonName/:salonName")
-  .get(getSpecificSalonDetails_SalonName);
+  .get(isAuthenticatedUser, getSpecificSalonDetails_SalonName);
 
 router
   .route("/get-salons-for-choosed-service/:category")

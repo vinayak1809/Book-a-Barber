@@ -1,0 +1,35 @@
+.mycard{
+    width: 300px;
+    height:400px;
+    background-color: rgb(194, 194, 194);
+    margin: 10px;
+    color: rgb(8, 8, 8);
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+   
+}
+
+.first-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+}
+
+.time ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.time ul li{
+    margin: 10px;
+    border: 1px solid black;
+    padding: 5px 11px;
+}
+
+.selected {
+    background: crimson;
+    color: white;
+  }

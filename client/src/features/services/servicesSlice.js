@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
   services: [],
+  choosedService: {},
 };
 
 export const getSpecificSalonServices = createAsyncThunk(
@@ -10,10 +11,11 @@ export const getSpecificSalonServices = createAsyncThunk(
   async (salonID) => {
     try {
       const services = await axios.get(
-        `http://localhost:4000/get-specific-salon-services/${salonID}`
+        `http://localhost:4000/get-specific-salon-services/${salonID}`,
+        { withCredentials: true }
       );
 
-      return services;
+      return services.data;
     } catch (error) {
       throw error; //
     }
@@ -34,16 +36,31 @@ export const registerService = createAsyncThunk(
     }
   }
 );
+
+export const setChoosedService = createAsyncThunk(
+  "services/setChoosedService",
+  async (details) => {
+    try {
+      const d = details;
+      console.log(details, "details");
+      return { choosedService: d };
+    } catch {}
+  }
+);
+
 export const salonServiceSlice = createSlice({
   name: "salonService",
   initialState,
   extraReducers: {
     [getSpecificSalonServices.fulfilled]: (state, action) => {
-      return { ...action.payload.data };
+      return { ...action.payload };
     },
     [registerService.fulfilled]: (state, action) => {
-      console.log(action.payload, "action.payload");
       return { ...action.payload };
+    },
+    [setChoosedService.fulfilled]: (state, action) => {
+      console.log(action.payload, "payload");
+      return { ...state, ...action.payload };
     },
   },
 });

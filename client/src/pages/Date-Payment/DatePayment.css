@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
 .date-payment{
     box-sizing: border-box;
     display: flex;
@@ -7,13 +9,35 @@
     flex-wrap: wrap;
 }
 
-.card{
-    width: 00px;
-    background-color: rgb(189, 187, 187);
-    margin: 0px;
-}
 .service-side{
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.service-side .h1 h1{
+    font-size: 1.7em;
+}
+
+.service-side .order-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    gap: 200px;
+}
+
+.service-side .name-price h6{
+    margin: 0;
+    font-size: 1.1em;
+    text-align: flex-end;
+}
+
+.service-side img{
+    width: 130px;
+    height: 130px;
 }
 
 .date-side{
@@ -21,9 +45,18 @@
 }
 
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 767px) {
     .date-payment {
       flex-direction: column;
       align-items: center;
+    }
+
+    .service-side{
+        width: 80%;
+        flex-direction: column;
+    }
+    
+    .date-side{
+        width: 100%;
     }
   }

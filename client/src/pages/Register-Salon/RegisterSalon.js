@@ -1,6 +1,7 @@
 import "./RegisterSalon.css";
-import { Link } from "react-router-dom";
 import { registerSalon } from "../../features/Salons/salonsSlice";
+
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,7 +13,7 @@ const RegisterSalon = () => {
   const [address, setAddress] = useState();
   const [bio, setBio] = useState();
 
-  const { user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.user);
 
   const pushData = (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const RegisterSalon = () => {
   };
   return (
     <>
-      <form onSubmit={(e) => pushData(e)}>
+      <form className="registration-salon-form" onSubmit={(e) => pushData(e)}>
         <div className="input-section">
           <div className="left-side-">
             <ul>
@@ -80,13 +81,17 @@ const RegisterSalon = () => {
           </div>
         </div>
         <div className="buttons">
-          <button type="submit">Save</button>
-          <button type="submit">Publish</button>
+          <button className="reg-btn" type="submit">
+            Save
+          </button>
+          <button className="reg-btn" type="submit">
+            Publish
+          </button>
         </div>
       </form>
       <div className="add-service">
-        <a>
-          <Link to={"/services"}>
+        <a href="/some">
+          <Link to="/Services">
             Add Services <span> -- </span>
           </Link>
         </a>

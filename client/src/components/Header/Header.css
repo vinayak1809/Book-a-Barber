@@ -1,4 +1,39 @@
 
+.navbar{
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin: 0px auto;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  top:0;
+  background-color: rgb(255, 255, 255);
+}
+
+.navbar .logo h3,.navber .signup h3{
+  color:  #FFB700;
+  font-size: 1.7em;
+  margin: 0;
+}
+
+.navbar .profile span{
+  color:  #FFB700;
+  font-size: 2.3em;
+  font-weight: 800;
+  margin: 0;
+}
+
+.sidebar{
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+/*
 .nav-desktop {
   margin: 0;
   background-color: var(--color-darkslategray);
@@ -102,3 +137,4 @@
     display: block;
   }
 }
+*/

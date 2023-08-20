@@ -10,7 +10,6 @@ const instance = new Razorpay({
 });
 
 const checkout = checkAsyncErrors(async (req, res) => {
-  console.log(req.body, "req.body");
   var options = {
     amount: Number(req.body.totalAmount * 100),
     currency: "INR",
@@ -24,6 +23,7 @@ const checkout = checkAsyncErrors(async (req, res) => {
     totalAmount: order.amount,
   };
 
+  console.log(postData, "postData");
   const appointment = await new Appointment({ ...postData });
   appointment.save();
 
@@ -50,9 +50,11 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
         status: true,
       },
       { new: true }
-    ).then((done) => console.log(done, "done"));
+    ).then((done) => console.log(done, "appoinment updated "));
 
-    res.status(200).json({ message: "payment  successfull", status: true });
+    res.redirect(
+      `http://localhost:3000/Orders?reference=${razorpay_payment_id}`
+    );
   } else {
     res.status(400).json({ message: "payment  unsuccessfull", status: false });
   }

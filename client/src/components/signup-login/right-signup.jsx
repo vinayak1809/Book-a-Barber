@@ -3,15 +3,18 @@ import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { useroptionLogin } from "../../features/user/optionSlice";
 import { createUser,checkUser } from "../../features/user/userSlice";
+import {  Navigate,useNavigate } from 'react-router-dom';
 
 const RightSideSignUp = () => {
-  
-  //option logic
-  const [login,setLogin] = useState(); 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
+  //option logic
+  const [login,setLogin] = useState(); 
+  
   const userOption = useSelector(state => state.userOption.login);
- 
+  const { user } = useSelector((state) => state.user.token);
+
   useEffect(() => {
     setLogin(userOption);
   }, [userOption]);
@@ -39,17 +42,20 @@ const RightSideSignUp = () => {
         dispatch(createUser(userDetails));
       }else{
         dispatch(checkUser(userDetails));
+        navigate("/Salons")
       }
     }
     
   return (
+<>
+    {user && <Navigate to="/" replace={true}></Navigate>}
     <div className="signup-login">
       <div className="heading">
         Begin your journey with
         <br />
-        <span>Book a Barber</span>
+        <span>us!</span>
       </div>
-      <form action="" onSubmit={(e)=>pushData(e)}>
+      <form  action="" onSubmit={(e)=>pushData(e)}>
         <div className="textarea">
           <ul>
           {!login && 
@@ -74,12 +80,12 @@ const RightSideSignUp = () => {
             <label name="">Role:</label>
             <div className="role-options">
 
-              <div className="role-option-1">
+              <div className="role-option">
                 <input type="radio" name="role" onChange = {(e) => setRole(e.target.value)} value="Barber"/>
                 <label name="">Barber</label>
               </div>
 
-              <div className="role-option-2">
+              <div className="role-option">
                 <input type="radio" name="role" onChange = {(e) => setRole(e.target.value)} value="user"/>
                 <label name="">User</label>
               </div>
@@ -90,21 +96,23 @@ const RightSideSignUp = () => {
 
         {login ?
         <>
-          <button  type="submit">Sign In</button>
+          <button className="signup-btn" type="submit">Sign In</button>
           <div className="already-acc">
-            <div onClick={()=>{ changeOption() }} >Register ?</div>
+            <div onClick={()=>{ changeOption() }} >Register?</div>
           </div>
         </> :
         <>
-          <button  type="submit">Sign Up</button>
+          <button className="signup-btn" type="submit">Sign Up</button>
           <div className="already-acc">
-            <div onClick={()=>{ changeOption() }} >Already have account ?</div>
+            <div onClick={()=>{ changeOption() }} >login?</div>
           </div>
         </>
         }
       </form>
     </div>
+    </>
   );
+
 };
 
 export default RightSideSignUp;

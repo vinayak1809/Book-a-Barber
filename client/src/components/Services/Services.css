@@ -1,18 +1,45 @@
+.top3{
+    width: 100%;
+}
 
-.services ul{
+.top3 h3{
+    font-size: 2.1em;
+}
+
+.top3 ul{
     display: flex;
     list-style-type: none;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.service-info{
-    display:flex;
-    flex-direction:row;
-    justify-content: space-between;
+
+.top3 ul img{
+    width: 300px;
+    height: 300px;
 }
 
-button{
-    width: 250px;
-    font-size: 15px;
+.service-info{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.service-info h1{
+    font-size: 1.5em;
+}
+
+.service-book-btn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.service-book-btn button{
+    background-color: black;
+    color: white;
+    padding:10px 30px ;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2em;
 }

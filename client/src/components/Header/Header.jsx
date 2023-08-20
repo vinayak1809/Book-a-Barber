@@ -1,39 +1,45 @@
-
-import {Link} from "react-router-dom";
 import "./Header.css";
+import { getSpecificSalonDetails_ID } from "../../features/Salons/salonsSlice";
+
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect,useState } from "react";
-import { getSpecificSalonDetails_ID } from "../../features/Salons/salonsSlice";
 import { useDispatch } from "react-redux";
+import { logout } from "../../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
 
-  const { user } = useSelector((state) => state);
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.user);
   const [links, setLinks] = useState([]);
-  
+  const [sideBar,setSideBar] = useState(false)
+
   const { salons } = useSelector((state) => (state.salons));
   const dispatch = useDispatch();
+
+  
 
   useEffect(() => {
     if(user.role === "Barber"){
       dispatch(getSpecificSalonDetails_ID(user._id));
       setLinks([])
     }
-    }, [user, dispatch]);
+  }, [user, dispatch]);
   
+
+
   useEffect(() => {
-    if(user.role === ""){
+    if (user.role === "user") {
       setLinks([
-        { name: "About", path: "/About" },
-        { name: "Blog", path: "/Blog" },
-        { name: "Salons", path: "/Salons" },
-        { name: "Login", path: "/signup" },
-      ])}
-    else if (user.role === "user") {
-      setLinks([
-        { name: "Blog", path: "/Blog" },
-        { name: "Salons", path: "/Salons" },
-        { name: "user", path: "/User" },
+        { name: "Edit-Profile", path: "/Edit-Profile" },
+        { name: "View-Profile", path: "/View-Profile" },
+        { name: "Appointments", path: "/Orders" },
+        { name: "Logout", path: "/Logout",on:() => {
+          dispatch(logout())
+          navigate('/')
+        }},
       ]);
     } else if (user.role === "Barber") {
       setLinks([
@@ -43,111 +49,49 @@ const Header = () => {
           : []),
         { name: "user", path: "/User" },
         { name: "Schedules", path: "/Schedules" },
+        { name: "logout", path: "/logout" },
       ]);
     }
-  }, [user.role, salons]);
+  }, [user, salons,dispatch,navigate]);
   
-  
+  const handleToggle = () => {
+    setSideBar(!sideBar);
+  };
   return (
-    <nav className="nav-desktop" id="navbar">
-      <div className="navbarLeftSide-parent" id="navbarLeftSide">
-      
-          <img
-            className="icon"
-            alt=""
-            src="/icon.png"
-          />
-          <Link to="/">
-            <b className="bookabarber">BookaBarber</b>
-          </Link>
+  <>
+    <nav className="navbar">
+      <div className="logo">
+      <Link to="/Salons" style={{ textDecoration: 'none' }}>
+        <h3>SNIPSNAP</h3>
+      </Link>
       </div>
-      <div className="nav-items-parent">
-        <div className="nav-items" id="navbarRightSide">
-          <ul>
-              {links.map((link,index) => (
-                <Link key={index} to={link.path}>
+      <div className="profile">
+        {user.role !== "" ?
+        <span onClick={handleToggle}  className="material-symbols-outlined">
+          account_circle
+        </span>
+        :
+        <Link to="/Signup" style={{ textDecoration: 'none' }}>
+          <h3>Login</h3>
+        </Link>
+        }
+      </div>
+    </nav>
+
+    {sideBar &&
+      <div className="sidebar">
+        <ul>
+        {links.map((link,index) => (
+                <Link key={index} to={link.path} onClick={link.on}>
                   <li>{link.name}</li>
                 </Link>
               ))}
-          </ul>
-        </div>
-        <div className="vector-wrapper">
-          <img className="vector-icon" alt="" src="/vector.svg" />
-        </div>
+          <span onClick={handleToggle} className="material-symbols-outlined">close</span>
+        </ul>
       </div>
-    </nav>
+    }
+  </>
   );
 };
 
 export default Header;
-
-const dates = [
-  {
-    date: "12 Sep",
-    time: [
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ],
-    date: "13 Sep",
-    time: [
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ],
-    date: "14 Sep",
-    time: [
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ],
-    date: "15 Sep",
-    time: [
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ],
-    date: "16 Sep",
-    time: [
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ],
-    date: "17 Sep",
-    time: [
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ],
-  },
-];

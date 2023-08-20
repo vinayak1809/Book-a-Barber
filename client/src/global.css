@@ -1,145 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap");
+
 body {
-    margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    margin: 0;
     line-height: normal;
     box-sizing: border-box;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
-:root {
-  /* fonts */
-  --body-body-1: Inter;
-  --font-orbitron: Orbitron;
+    margin: 0;
+    padding: 0;
 
-  /* font sizes */
-  --body-body-1-size: 16px;
-  --heading-h5-size: 24px;
-  --font-size-45xl: 64px;
-  --font-size-53xl: 72px;
-  --font-size-43xl: 62px;
-  --font-size-23xl: 42px;
-  --font-size-13xl: 32px;
-  --label-medium-label-size: 14px;
-
-  /* Colors */
-  --default-white: #fff;
-  --color-gray-100: #fffdfd;
-  --color-gray-200: #1b1b3d;
-  --text-gray-900: #18191f;
-  --color-whitesmoke-100: #f4f5f7;
-  --color-whitesmoke-200: #f2f2f2;
-  --color-darkslategray: #333;
-
-  /* Gaps */
-  --gap-29xl: 48px;
-  --gap-13xl: 32px;
-  --gap-21xl: 40px;
-  --gap-5xs: 8px;
-  --gap-42xl: 61px;
-  --gap-632xl: 651px;
-  --gap-481xl: 500px;
-  --gap-331xl: 350px;
-  --gap-31xl: 50px;
-  --gap-4xs: 9px;
-
-  /* Paddings */
-  --padding-45xl: 64px;
-  --padding-146xl: 165px;
-  --padding-xs: 12px;
-  --padding-13xl: 32px;
-  --padding-89xl: 108px;
-
-  /* border radiuses */
-  --br-5xs: 8px;
-  --br-81xl: 100px;
-  --br-7xs: 6px;
-
-  /* Effects */
-  --navbar-shadow: 0px 1px 0px #e5e9f2;
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@500;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap");
-
-:root {
-  /* fonts */
-  --font-jost: Jost;
-  --label-large-label: Inter;
-  --font-orbitron: Orbitron;
-
-  /* font sizes */
-  --font-size-9xl: 28px;
-  --font-size-11xl: 30px;
-  --font-size-16xl: 35px;
-  --font-size-17xl: 36px;
-  --font-size-31xl: 50px;
-  --label-large-label-size: 16px;
-  --heading-h1-size: 72px;
-  --font-size-43xl: 62px;
-  --font-size-23xl: 42px;
-  --font-size-13xl: 32px;
-  --heading-h5-size: 24px;
-  --font-size-45xl: 64px;
-  --label-medium-label-size: 14px;
-
-  /* Colors */
-  --default-white: #fff;
-  --color-black: #000;
-  --color-darkslategray-100: #3f3f3f;
-  --gray-1: #333;
-  --color-whitesmoke-100: #f4f5f7;
-  --gray-6: #f2f2f2;
-  --color-whitesmoke-300: #ebebeb;
-  --color-whitesmoke-400: #d4d1d1;
-  --color-dimgray: #4d3232;
-  --color-gray-100: #fffdfd;
-  --color-gray-200: #1b1b3d;
-  --text-gray-900: #18191f;
-
-  /* Gaps */
-  --gap-53xl: 72px;
-  --gap-6xl: 25px;
-  --gap-270xl: 289px;
-  --gap-5xs: 8px;
-  --gap-42xl: 61px;
-  --gap-13xl: 32px;
-  --gap-29xl: 48px;
-  --gap-21xl: 40px;
-  --gap-632xl: 651px;
-  --gap-481xl: 500px;
-  --gap-331xl: 350px;
-  --gap-31xl: 50px;
-  --gap-4xs: 9px;
-
-  /* Paddings */
-  --padding-3xs: 10px;
-  --padding-13xl: 32px;
-  --padding-91xl: 110px;
-  --padding-96xl: 115px;
-  --padding-xs: 12px;
-  --padding-45xl: 64px;
-  --padding-146xl: 165px;
-  --padding-89xl: 108px;
-
-  /* border radiuses */
-  --br-31xl: 50px;
-  --br-7xs: 6px;
-  --br-5xs: 8px;
-  --br-81xl: 100px;
-
-  /* Effects */
-  --navbar-shadow: 0px 1px 0px #e5e9f2;
 }

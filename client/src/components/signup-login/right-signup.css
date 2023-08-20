@@ -4,29 +4,31 @@
   align-items: flex-start;
   box-sizing: border-box;
   padding: 100px;
+  height: 100%;
   width: 50%;
-  gap: 80px;
 }
 
 .heading{
   font-size: 30px;
+  margin: 0;
   > span{
     color: rgb(94, 21, 21);
   }
 }
 
 .textarea{
-  width: 350px;
+  width: 80%;
+  margin-top: 50px;
 }
 
 .textarea ul{
     list-style-type: none; 
     padding: 0px;  
- }
+}
 
 .textarea ul input{
-    background-color: var(--color-whitesmoke-400);
-    width: 350px;
+    background-color: rgb(204, 204, 204);
+    width: 80%;
     height: 40px;
     border-radius: 50px;
     margin-bottom: 20px;
@@ -43,25 +45,43 @@
 }
 
 .textarea .role{
+    width:80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: 5px;
     > .role-options{
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
     }
   }
 
+.role-options .role-option{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+input[type=radio] {
+  height:10px; width:10px; vertical-align: middle;
+}
 
-button{
-  padding: 8px 30px;
-  font-size: 27px;
-  font-weight: 600;
-  width: 200px;
-  color: white;
-  border-radius: 50px;
-  border: 1px solid black;
-  background-color: black;
+button.signup-btn{
+    margin-top: 80px;
+    cursor: pointer;
+    border: 0;
+    padding: 10px 30px;
+    font-size: 1.0em;
+    background-color:black;
+    color: white;
+    border-radius: 30px;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: center;
+    width: 130px;
+  
 }
 
 .already-acc{
@@ -71,12 +91,29 @@ button{
 @media only screen and (max-width: 800px) {
   .signup-login {
     width: 100%;
+    margin: auto;
     align-items: center;
-    padding: 50px;
-    gap: 65px;
   }
+
+  .heading{
+    font-size: 30px;
+    margin: auto;
+  }
+  .textarea{
+    width: 100%;
+    margin: auto;
+  }
+
+  .textarea ul input{
+    background-color: rgb(204, 204, 204);
+    width:350px;
+  }
+
   .already-acc{
-    margin-top: 0px;
+    margin: 2px 0px 0px 10px;
     display: block;
+    font-size: 0.9em;
+    color: rgb(88, 88, 88);
+    text-decoration: underline;
   }
 }

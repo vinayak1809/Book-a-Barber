@@ -8,9 +8,9 @@ export const useroptionLogin = createAsyncThunk(
   "user/optionLogin", //type name
   async (options) => {
     if (!options) {
-      return false;
+      return { login: false };
     } else {
-      return true;
+      return { login: true };
     }
   }
 );
@@ -20,7 +20,7 @@ export const userOptionSlice = createSlice({
   initialState,
   extraReducers: {
     [useroptionLogin.fulfilled]: (state, action) => {
-      state.login = action.payload;
+      return { ...action.payload };
     },
   },
 });
