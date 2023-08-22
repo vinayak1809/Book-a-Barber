@@ -1,10 +1,9 @@
 import "./SalonsPage.css";
 import Header from "../../components/Header/Header";
 import { Salons } from "../../components/Salons/Salons";
-import {
-  getAllSalonsDetails,
-  getSalonsForChosedService,
-} from "../../features/Salons/salonsSlice";
+import { getAllSalonsDetails } from "../../features/Salons/salonsSlice";
+
+import { getServicesForChossedCategory } from "../../features/services/servicesSlice";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,14 +13,10 @@ const SalonsPage = () => {
   const [service, setService] = useState("");
 
   const { user } = useSelector((state) => state.user);
-  const { salons } = useSelector((state) => state.salons);
+  const { services } = useSelector((state) => state.services);
 
   useEffect(() => {
-    if (service === "All" || service === "") {
-      dispatch(getAllSalonsDetails());
-    } else {
-      dispatch(getSalonsForChosedService(service));
-    }
+    dispatch(getServicesForChossedCategory(service || "All"));
   }, [service, dispatch]);
 
   return (
@@ -42,7 +37,7 @@ const SalonsPage = () => {
             <option value="Massage">Massage</option>
           </select>
         </div>
-        <Salons user={user} salons={salons} />
+        <Salons user={user} salons={services} />
       </div>
     </div>
   );

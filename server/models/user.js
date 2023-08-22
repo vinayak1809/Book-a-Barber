@@ -19,11 +19,12 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+    selected: false,
   },
   profilePicture: {
     type: String,
     default:
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+      "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png",
   },
   role: {
     type: String,
@@ -36,6 +37,10 @@ const userSchema = new Schema({
 });
 
 userSchema.pre("save", async function (next) {
+  if (this.isModified("email")) {
+    this.email = this.email.toLowerCase();
+  }
+
   if (!this.isModified("password")) {
     next();
   }
@@ -49,7 +54,6 @@ userSchema.methods.getJWTToken = function () {
 };
 
 userSchema.methods.comparePassword = async function (password) {
-  console.log(password, "password");
   return await bcrypt.compare(password, this.password);
 };
 

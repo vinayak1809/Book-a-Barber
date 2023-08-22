@@ -24,7 +24,9 @@ connection;
 
 app.use(cookieParser());
 app.get("/api/getKey", (req, res) =>
-  res.status(200).json({ key: process.env.RZP_KEY_ID })
+  res
+    .status(200)
+    .json({ RZP_key: process.env.RZP_KEY_ID, CLOUD_key: process.env.CLOUD_KEY })
 );
 
 app.listen(4000);

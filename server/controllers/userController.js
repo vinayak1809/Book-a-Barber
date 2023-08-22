@@ -6,18 +6,18 @@ const sendtoken = require("./../config/jwtToken");
 const registerUser = catchAsyncErros(async (req, res, next) => {
   const user = new User({ ...req.body });
   user.save();
-  return true;
+
+  res.status(201).json({ user: user, success: true });
 });
 
-const checkUser = catchAsyncErros(async (req, res, next) => {
+const checkLoginDetails = catchAsyncErros(async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email: email }).select("+password");
 
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    console.log("not match password");
-    return;
+    res.status(400).json({ success: false, message: "Password incorrect" });
   }
 
   sendtoken(user, 200, res);
@@ -25,16 +25,16 @@ const checkUser = catchAsyncErros(async (req, res, next) => {
 
 const checkForUser_Token = catchAsyncErros(async (req, res, next) => {
   if (!req.token) {
-    res.json({ user: { role: "" }, success: false, token: "" });
+    res.status(200).json({ user: { role: "" }, success: false, token: "" });
   }
-  res.json({ user: req.user, success: true, token: req.token });
+  res.status(200).json({ user: req.user, success: true, token: req.token });
 });
 
-const getUserOrders = catchAsyncErros(async (req, res) => {
+const getUserAppointments = catchAsyncErros(async (req, res) => {
   const userID = req.user._id;
   const orders = await Appointment.find({ userId: userID });
 
-  res.json({ orders: orders, success: true });
+  res.status(200).json({ orders: orders, success: true });
 });
 
 const logout = catchAsyncErros(async (req, res, next) => {
@@ -50,13 +50,14 @@ const logout = catchAsyncErros(async (req, res, next) => {
       token: "",
       success: false,
       msg: "Logged out Successfully.",
+      orders: [],
     });
 });
 
 module.exports = {
   registerUser,
-  checkUser,
+  checkLoginDetails,
   checkForUser_Token,
-  getUserOrders,
+  getUserAppointments,
   logout,
 };

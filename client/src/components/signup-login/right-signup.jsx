@@ -2,7 +2,7 @@ import "./right-signup.css";
 import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { useroptionLogin } from "../../features/user/optionSlice";
-import { createUser,checkUser } from "../../features/user/userSlice";
+import { createUser,checkLoginDetails } from "../../features/user/userSlice";
 import {  Navigate,useNavigate } from 'react-router-dom';
 
 const RightSideSignUp = () => {
@@ -10,17 +10,17 @@ const RightSideSignUp = () => {
   const dispatch = useDispatch();
 
   //option logic
-  const [login,setLogin] = useState(); 
+  const [loginSignup,setLoginSignup] = useState(); 
   
   const userOption = useSelector(state => state.userOption.login);
   const { user } = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    setLogin(userOption);
+    setLoginSignup(userOption);
   }, [userOption]);
 
   const changeOption = () =>{
-      dispatch(useroptionLogin(!login))  
+      dispatch(useroptionLogin(!loginSignup))  
     }
  
     //register logic
@@ -38,10 +38,10 @@ const RightSideSignUp = () => {
         password:password,
         role:role
       }
-      if (!login){
+      if (!loginSignup){
         dispatch(createUser(userDetails));
       }else{
-        dispatch(checkUser(userDetails));
+        dispatch(checkLoginDetails(userDetails));
         navigate("/Salons")
       }
     }
@@ -58,35 +58,35 @@ const RightSideSignUp = () => {
       <form  action="" onSubmit={(e)=>pushData(e)}>
         <div className="textarea">
           <ul>
-          {!login && 
+          {!loginSignup && 
             <input
             type="text" name="name" id="name" 
-            placeholder={"Name :"}
+            placeholder={"Name :"} required
             onChange={(e) => setName(e.target.value)}
             ></input>
 
           }
-            <input type="email" name="email" id="email" placeholder={"Email :"}
+            <input type="email" name="email" id="email" required placeholder={"Email :"}
             onChange={(e) => setEmail(e.target.value)}>
             </input>
             
-            <input type="password" name="password" id="password" placeholder={"Password :"}
+            <input type="password" required name="password" id="password" placeholder={"Password :"}
             onChange={(e) => setPassword(e.target.value)}>
             </input>
 
           </ul>
-          {!login && 
+          {!loginSignup && 
           <div className="role">
             <label name="">Role:</label>
             <div className="role-options">
 
               <div className="role-option">
-                <input type="radio" name="role" onChange = {(e) => setRole(e.target.value)} value="Barber"/>
+                <input type="radio" name="role" required onChange = {(e) => setRole(e.target.value)} value="Barber"/>
                 <label name="">Barber</label>
               </div>
 
               <div className="role-option">
-                <input type="radio" name="role" onChange = {(e) => setRole(e.target.value)} value="user"/>
+                <input type="radio" name="role" required onChange = {(e) => setRole(e.target.value)} value="user"/>
                 <label name="">User</label>
               </div>
               
@@ -94,7 +94,7 @@ const RightSideSignUp = () => {
           </div>}
         </div>
 
-        {login ?
+        {loginSignup ?
         <>
           <button className="signup-btn" type="submit">Sign In</button>
           <div className="already-acc">

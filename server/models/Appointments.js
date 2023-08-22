@@ -14,9 +14,15 @@ const AppointmentScehma = new Schema({
   },
   services: [
     {
-      type: mongoose.Types.ObjectId,
-      ref: "services",
-      required: true,
+      serviceID: {
+        type: mongoose.Types.ObjectId,
+        ref: "services",
+        required: true,
+      },
+      serviceName: {
+        type: String,
+        require: true,
+      },
     },
   ],
   date: {

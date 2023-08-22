@@ -11,12 +11,15 @@ const Services = (props) => {
   const { services,salonName }= props;
   const { user } = useSelector((state) => state.user);
 
-  const redirectTo = (service) => {
-    dispatch(setChoosedService(service))
-    
-    user.role === "user" ? navigate(`/Salon/${user.fullname}/${salonName}/select-date`, {state:{service:service}})
-    :
-    navigate("/signup")
+  const redirectTo = (service,tagname) => {
+    const action = {
+      service:service,
+      tagname:tagname
+    }
+   dispatch(setChoosedService(action))
+   user.role === "user" ? navigate(`/Salon/${user.fullname}/${salonName}/select-date`)
+   :
+   navigate("/signup")
 }
     
   return (
@@ -24,20 +27,27 @@ const Services = (props) => {
       <div className='top3'>
           <h3>Services</h3>
           <ul>
-          {services.map((link, index) => (
-              <li key={index}>
-                  <div>
-                      <img src={`/${link.image}`} alt="not supported"></img>
-                  </div>
-                  <div className="service-info">
-                      <h1>{link.name}</h1>
-                      <p>{link.price}</p>
-                  </div>
-                  <div className='service-book-btn'>
-                    <button onClick={()=>redirectTo(link)}>Book</button>
-                  </div>
-              </li>
+         {services.map((link, index) => (
+
+            <li className="tag" key={index}>
+              <h3>{link.tag}</h3>
+              <div className="tag-list">
+
+                    {link.types.map((link2,index)=>(
+                      <div className="tagname">
+                        <p>{link2.name}</p>
+                        <div className='service-book-btn'>
+                            <button onClick={()=>redirectTo(link,link2.name)}>Book</button>
+                        </div>
+                      </div>
+                    ))}
+
+              </div>
+            </li>
+         
           ))}
+          
+
           </ul>
       </div>
     </>

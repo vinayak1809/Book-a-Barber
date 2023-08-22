@@ -11,20 +11,20 @@ export const Salons = (props) => {
         <ul>
         {
           salons.map((link,index) => (
-            <Link style={{ textDecoration: 'none'}} key={index} to={user._id ? `/Salon/${user.fullname}/${link.name}` :`/Salon/${link.name}`}  state={{ salonID: link._id}} >
+            <Link style={{ textDecoration: 'none'}} key={index} to={user._id ? `/Salon/${user.fullname}/${link.salonID.name}` :`/Salon/${link.salonID.name}`}  state={{ salonID: link.salonID._id}} >
                 <li key={index}>
                     <div className="img-section">
-                        <img src={link.logo} alt="" />
+                        <img src={link.salonID.logo} alt="" />
                     </div>
                     <div className="salon-name">
-                        <p>{link.name}</p>
+                        <p>{link.salonID.name}</p>
                         <p>$100</p>
                     </div>
                     <div className="service-name">
-                      <p>Haircut</p>
+                      <p>{link.name}</p>
                     </div>
                     <div className="salon-description">
-                        <p>{link.location}</p>
+                        <p>{link.salonID.location}</p>
                     </div>
                 </li>
             </Link> 

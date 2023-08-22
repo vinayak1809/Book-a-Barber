@@ -9,10 +9,27 @@
 .top3 ul{
     display: flex;
     list-style-type: none;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 60%;
+    margin: 0px;
 }
 
+.top3 .tag{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.top3 .tagname{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+/*
 
 .top3 ul img{
     width: 300px;
@@ -43,3 +60,12 @@
     border-radius: 20px;
     font-size: 1.2em;
 }
+
+@media (width <= 876px){
+    .top3 ul{
+        flex-direction: column;
+        justify-content: space-around;
+        width: 55%;
+        margin: auto;
+    }
+}*/

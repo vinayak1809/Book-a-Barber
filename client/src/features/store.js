@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
 import { userReducer } from "./user/userSlice";
@@ -10,9 +10,12 @@ import { salonsReducer } from "./Salons/salonsSlice";
 import { salonServicesReducer } from "./services/servicesSlice";
 
 const persistConfig = {
-  key: "user",
-  version: 1,
+  key: "root",
+  version: 2,
   storage,
+  migrate: (state) => {
+    return Promise.resolve(state);
+  },
 };
 
 const rootReducer = combineReducers({

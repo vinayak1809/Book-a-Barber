@@ -39,12 +39,34 @@ export const registerService = createAsyncThunk(
 
 export const setChoosedService = createAsyncThunk(
   "services/setChoosedService",
-  async (details) => {
+  async (action) => {
     try {
-      const d = details;
-      console.log(details, "details");
-      return { choosedService: d };
+      const { service, tagname } = action;
+      const newService = { ...service };
+
+      var filter = newService.types.filter(checkTag);
+
+      function checkTag(a) {
+        return tagname === a.name;
+      }
+
+      newService.types = filter;
+      return { choosedService: newService };
     } catch {}
+  }
+);
+
+export const getServicesForChossedCategory = createAsyncThunk(
+  "salons/getServicesForChossedCategory",
+  async (category) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/get-services-for-choosed-category/${category}`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
@@ -59,7 +81,9 @@ export const salonServiceSlice = createSlice({
       return { ...action.payload };
     },
     [setChoosedService.fulfilled]: (state, action) => {
-      console.log(action.payload, "payload");
+      return { ...state, ...action.payload };
+    },
+    [getServicesForChossedCategory.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
     },
   },

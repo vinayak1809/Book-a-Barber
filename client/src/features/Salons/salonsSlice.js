@@ -3,7 +3,12 @@ import axios from "axios";
 
 const initialState = {
   salons: [],
-  currentSalon: {},
+  currentSalon: [
+    {
+      name: "",
+      logo: "",
+    },
+  ],
 };
 
 export const registerSalon = createAsyncThunk(

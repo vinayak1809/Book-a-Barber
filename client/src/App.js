@@ -23,9 +23,8 @@ function App() {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(checkForUser_Token());
     return;
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     user.role === "user" && <Navigate to="/Salons" replace={true}></Navigate>;

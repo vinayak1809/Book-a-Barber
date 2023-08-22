@@ -15,14 +15,19 @@ main .salon-view{
     border-radius: 10px;
     gap: 100px;
 }
-
+main .salon-view-img {
+   width: 70%;
+}
+  
 main .salon-view img{
-    width: 700px;
+    width: 100%;
     height: 450px;
     border-radius: 10px;
 }
 
 .salon-view-description{
+
+    width: 20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,4 +46,38 @@ main .salon-view img{
 .salonPage .salon-services{
     width: 80% ;
     margin: auto;
+}
+
+@media (width <= 867px) {
+    main.salonPage{
+        width: 80%;
+        margin: auto;
+    }
+    main .salon-view{
+        flex-direction: column;
+        margin: auto;
+        width: 100%;
+        gap: 20px;
+    }
+
+    main .salon-view-img {
+        width: 100%;
+     }
+
+
+    .salon-view-description{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .salon-view-description h3{
+        margin-bottom: 10px;
+    }
+
+    .salonPage .salon-services{
+        width: 100% ;
+        margin: auto;
+    }
 }

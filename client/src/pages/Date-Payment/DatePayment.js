@@ -1,13 +1,13 @@
 import "./DatePayment.css";
 import DateCarousel from "../../components/Date-Carousel/DateCarousel";
 
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const DatePayment = () => {
   const { salonName } = useParams();
-  const { state } = useLocation();
   const { user } = useSelector((state) => state);
+  const { choosedService } = useSelector((state) => state.services);
 
   return (
     <>
@@ -16,15 +16,15 @@ const DatePayment = () => {
       <main className="date-payment">
         <div className="service-side">
           <div className="h1">
-            <h1>{salonName}</h1>
+            <h1>{choosedService.salonID.name}</h1>
           </div>
           <div className="order-list">
             <div className="img-order">
-              <img src={`/${state.service.image}`} alt="not found"></img>
+              <p>{choosedService.tag}</p>
             </div>
             <div className="name-price">
-              <h6>{state.service.name}</h6>
-              <p>{state.service.price}₹</p>
+              <h6>{choosedService.types[0].name}</h6>
+              <p>{choosedService.types[0].price}₹</p>
             </div>
           </div>
           {/* <div className="second">
@@ -34,7 +34,7 @@ const DatePayment = () => {
         <div className="date-side">
           <form>
             <div className="wrapper">
-              <DateCarousel service={state.service} />
+              <DateCarousel service={choosedService} />
             </div>
           </form>
         </div>

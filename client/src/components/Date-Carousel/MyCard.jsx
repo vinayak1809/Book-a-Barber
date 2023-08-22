@@ -16,18 +16,19 @@ const MyCard = (props) => {
     e.preventDefault();
     const appointmentDetails = {
       userId: user._id,
-      barberId: choosedService.salonID,
-      services: choosedService._id,
+      barberId: choosedService.salonID._id,
+      services: [{
+        serviceID:choosedService._id,serviceName:choosedService.types[0].name
+      }],
       time: time,
       date: props.count,
       status: false,
       totalAmount: 100,
     };
 
-    console.log(appointmentDetails,"appointmentDetails")
 
     const {
-      data: { key },
+      data: { RZP_key },
     } = await axios.get("http://localhost:4000/api/getKey");
 
     const {
@@ -35,7 +36,7 @@ const MyCard = (props) => {
     } = await axios.post("http://localhost:4000/checkout", appointmentDetails);
 
     const options = {
-      key: key,
+      key: RZP_key,
       amount: order.amount,
       currency: "INR",
       name: "Book a Barber",

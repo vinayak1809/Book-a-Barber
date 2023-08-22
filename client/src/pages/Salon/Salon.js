@@ -13,10 +13,12 @@ const Salon = () => {
   const dispatch = useDispatch();
   const { salonName } = useParams();
 
-  const { salons } = useSelector((state) => state.salons);
+  const { currentSalon } = useSelector((state) => state.salons);
   const { services } = useSelector((state) => state.services);
 
+  console.log("hello", currentSalon);
   useEffect(() => {
+    console.log("hello", salonName);
     const fetchSalonDetails = async () => {
       await dispatch(getSpecificSalonDetails_SalonName(salonName));
     };
@@ -27,10 +29,10 @@ const Salon = () => {
   }, [dispatch, salonName]);
 
   useEffect(() => {
-    if (salons.length > 0) {
-      dispatch(getSpecificSalonServices(salons[0]._id));
+    if (currentSalon.length > 0) {
+      dispatch(getSpecificSalonServices(currentSalon[0]._id));
     }
-  }, [dispatch, salons]);
+  }, [dispatch, currentSalon]);
 
   return (
     <>
@@ -38,20 +40,20 @@ const Salon = () => {
         <Header />
         <div className="salon-view">
           <div className="salon-view-img">
-            <img src={`/${salons[0].logo}`} alt="" />
+            <img src={`${currentSalon[0].logo}`} alt="" />
           </div>
           <div className="salon-view-description">
-            <h3>{salons[0].name}</h3>
-            <p className="p1">
-              A26-28, Sector 110 Market, Shramik Kunj, Sector 110, Noida, Uttar
-              Pradesh 201304, India
-            </p>
+            <h3>{currentSalon[0].name}</h3>
+            <p className="p1">{currentSalon[0].address}</p>
             <div className="dash"></div>
-            <p className="p2"> Mon-Sun | 10:00 am - 8:00 pm </p>
+            <p className="p2">
+              {currentSalon[0].Schedules} | {currentSalon[0].time}{" "}
+            </p>
+            {/*10:00 am - 8:00 pm*/}
           </div>
         </div>
         <div className="salon-services">
-          <Services salonName={salons[0].name} services={services} />
+          <Services salonName={currentSalon[0].name} services={services} />
         </div>
       </main>
     </>
