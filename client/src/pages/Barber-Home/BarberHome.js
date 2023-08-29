@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 const BarberHome = () => {
-  const { user } = useSelector((state) => state);
-  const { salons } = useSelector((state) => state.salons);
+  const { user } = useSelector((state) => state.user);
+  const { currentSalon } = useSelector((state) => state.salons);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const BarberHome = () => {
     <>
       <Header />
       <div className="barber-home">
-        {user.role && salons.length > 0 ? (
+        {user.role && currentSalon.length > 0 ? (
           <>
             <button>Check Schedules</button>
             <button>Update Salon</button>

@@ -5,7 +5,6 @@ const {
 } = await axios.get("http://localhost:4000/api/getKey");
 
 export const imageUpload = async (image) => {
-  let imgArr = [];
   const formData = new FormData();
 
   if (image.camera) {
@@ -26,7 +25,5 @@ export const imageUpload = async (image) => {
   );
 
   const data = await res.json();
-  imgArr.push({ public_id: data.public_id, url: data.secure_url });
-
-  return imgArr;
+  return { url: data.secure_url };
 };

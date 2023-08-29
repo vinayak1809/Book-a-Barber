@@ -13,6 +13,8 @@ main.main-homePage{
 .head h1 {
   font-size: 12.5em; 
   margin-bottom: 10px;
+  margin-top: 0px;
+  padding-top: 100px;
 }
 
 .head p {
@@ -101,17 +103,18 @@ main .barber-signup{
       background-color: transparent;
       border-radius: 5px;
     }
-
-    >button{
-      outline: none;
-      border: none;
-      background-color: white;
-      border-radius: 5px;
-      width: 100px;
-    }
   }
 }
 
+.subscribe-btn{
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+  width: 100px;
+  padding: 17px 0px;
+}
 
 main .image{
   display: flex;
@@ -138,22 +141,22 @@ main .homePage-salons{
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-
-  >.homePage-salon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-  }  
 }
+.homePage-salon {
+  text-align: center;
+  text-decoration: none;
+}
+
 .homePage-salon img{
     border-radius: 50%;
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
 }
+
 .homePage-salon h3{
-  color: black;
-  text-decoration: none;
+  font-size: 1.0em;
+  color: rgb(36, 35, 35);
+  text-align: center;
 }
 
 .more-link {
@@ -177,7 +180,8 @@ main .got-questions{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 200px auto 300px;
+  margin: 200px auto 0px;
+  padding-bottom: 300px;
   width: 80%;
 
   >h3{

@@ -6,12 +6,7 @@ import axios from "axios";
 const initialState = {
   success: "",
   user: {
-    fullname: "",
-    email: "",
-    password: "",
-    profilepicture: "",
     role: "",
-    contactinformation: "",
   },
   token: "",
   orders: [],
@@ -114,7 +109,7 @@ export const userSlice = createSlice({
       return { ...state, ...action.payload };
     },
     [logout.fulfilled]: (state, action) => {
-      return { ...action.payload };
+      return { ...state, ...action.payload };
     },
   },
 });

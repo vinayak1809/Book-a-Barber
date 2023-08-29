@@ -13,7 +13,7 @@ const RightSideSignUp = () => {
   const [loginSignup,setLoginSignup] = useState(); 
   
   const userOption = useSelector(state => state.userOption.login);
-  const { user } = useSelector((state) => state.user.token);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     setLoginSignup(userOption);
@@ -36,13 +36,18 @@ const RightSideSignUp = () => {
         fullname:name,
         email:email,
         password:password,
-        role:role
+        role:role 
       }
+
       if (!loginSignup){
         dispatch(createUser(userDetails));
       }else{
         dispatch(checkLoginDetails(userDetails));
-        navigate("/Salons")
+        if(user.role === "user"){
+          navigate("/Salons")
+        }else{
+          navigate("/")
+        }
       }
     }
     

@@ -1,7 +1,6 @@
 import "./SalonsPage.css";
 import Header from "../../components/Header/Header";
 import { Salons } from "../../components/Salons/Salons";
-import { getAllSalonsDetails } from "../../features/Salons/salonsSlice";
 
 import { getServicesForChossedCategory } from "../../features/services/servicesSlice";
 
@@ -12,13 +11,16 @@ const SalonsPage = () => {
   const dispatch = useDispatch();
   const [service, setService] = useState("");
 
+  //useSelector second 3
   const { user } = useSelector((state) => state.user);
   const { services } = useSelector((state) => state.services);
 
+  //useEffect second 2
   useEffect(() => {
     dispatch(getServicesForChossedCategory(service || "All"));
   }, [service, dispatch]);
 
+  //return renders first 1
   return (
     <div className="top2">
       <Header />

@@ -14,13 +14,12 @@ const Header = () => {
 
   const { user } = useSelector((state) => state.user);
   const [links, setLinks] = useState([]);
-  const [sideBar,setSideBar] = useState(false)
+  const [sideBar,setSideBar] = useState(false);
 
-  const { salons } = useSelector((state) => (state.salons));
+  const { currentSalon } = useSelector((state) => state.salons);
   const dispatch = useDispatch();
 
   
-
   useEffect(() => {
     if(user.role === "Barber"){
       dispatch(getSpecificSalonDetails_ID(user._id));
@@ -36,38 +35,42 @@ const Header = () => {
         { name: "Edit-Profile", path: "/Edit-Profile" },
         { name: "View-Profile", path: "/View-Profile" },
         { name: "Appointments", path: "/Orders" },
-        { name: "Logout", path: "/Logout",on:() => {
+        { name: "Logout", path: "/logout",on:() => {
           dispatch(logout())
           navigate('/')
         }},
       ]);
-    } else if (user.role === "Barber") {
+    } else if (user.role === "barber") {
       setLinks([
-        ...(salons.length > 0
-          ? [{ name: "Salon", path: `/Salon/${user.fullname}/${salons[0].name}` },
-              { name: "Services", path: "/Services" }]
-          : []),
+        ...(currentSalon.length > 0
+          ? [{ name: "Salon", path: `/Salon/${user.fullname}/${currentSalon[0].name}` }]
+          : [{ name: "Register", path: `/register-salon` }]),
+          //{ name: "Services", path: "/Services" }
         { name: "user", path: "/User" },
         { name: "Schedules", path: "/Schedules" },
-        { name: "logout", path: "/logout" },
+        { name: "logout",path: "/logout",on:() => {
+          dispatch(logout())
+          navigate('/')
+        }},
       ]);
     }
-  }, [user, salons,dispatch,navigate]);
+  }, [user, currentSalon,dispatch,navigate]);
   
   const handleToggle = () => {
     setSideBar(!sideBar);
   };
+
   return (
   <>
     <nav className="navbar">
       <div className="logo">
-      <Link to="/Salons" style={{ textDecoration: 'none' }}>
+      <Link to="/" style={{ textDecoration: 'none' }}>
         <h3>SNIPSNAP</h3>
       </Link>
       </div>
       <div className="profile">
         {user.role !== "" ?
-        <span onClick={handleToggle}  className="material-symbols-outlined">
+        <span onClick={handleToggle} className="material-symbols-outlined">
           account_circle
         </span>
         :
@@ -85,7 +88,7 @@ const Header = () => {
                 <Link key={index} to={link.path} onClick={link.on}>
                   <li>{link.name}</li>
                 </Link>
-              ))}
+          ))}
           <span onClick={handleToggle} className="material-symbols-outlined">close</span>
         </ul>
       </div>

@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { checkForUser_Token } from "./features/user/userSlice";
 
 import HomePage from "./pages/Home/HomePage";
 import SignUpLogin from "./pages/Signup-login/signUp-Login";
@@ -18,8 +16,6 @@ import Orders from "./pages/Orders/Orders";
 //axios.defaults.withCredentials = true;
 
 function App() {
-  const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {

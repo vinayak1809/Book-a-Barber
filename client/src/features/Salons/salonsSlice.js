@@ -41,6 +41,7 @@ export const getSpecificSalonDetails_ID = createAsyncThunk(
   async (userID) => {
     try {
       //changed to salonName from userID
+      console.log("request generated");
       const response = await axios.get(
         `http://localhost:4000/get-specific-salon-details-ID/${userID}`,
         { withCredentials: true }

@@ -4,6 +4,7 @@ import { registerSalon } from "../../features/Salons/salonsSlice";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { imageUpload } from "../../utils/imageUpload";
 
 const RegisterSalon = () => {
   const dispatch = useDispatch();
@@ -11,18 +12,27 @@ const RegisterSalon = () => {
   const [contact, setContact] = useState();
   const [city, setCity] = useState();
   const [address, setAddress] = useState();
+  const [image, setImage] = useState();
   const [bio, setBio] = useState();
 
   const { user } = useSelector((state) => state.user);
 
-  const pushData = (e) => {
+  const handleMedia = (e) => {
     e.preventDefault();
+    setImage(e.target.files[0]);
+  };
+
+  const pushData = async (e) => {
+    e.preventDefault();
+    const img = await imageUpload(image);
+
     const salonDetails = {
       userId: user.user_id,
       name: name,
       contactInformation: contact,
       location: city,
       bio: bio,
+      image: img,
       address: address,
     };
     dispatch(registerSalon(salonDetails));
@@ -58,7 +68,7 @@ const RegisterSalon = () => {
                   type="file"
                   name="file"
                   id="file"
-                  multiple
+                  onChange={handleMedia}
                   accept="image/*,video/*"
                 />
               </li>

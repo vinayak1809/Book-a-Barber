@@ -38,20 +38,21 @@ const getUserAppointments = catchAsyncErros(async (req, res) => {
 });
 
 const logout = catchAsyncErros(async (req, res, next) => {
-  res
-    .cookie("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-      secure: true,
-      sameSite: "none",
-    })
-    .json({
-      user: { role: "" },
-      token: "",
-      success: false,
-      msg: "Logged out Successfully.",
-      orders: [],
-    });
+  console.log("logout");
+
+  res.cookie("token", "", {
+    httpOnly: true,
+    expires: new Date(0),
+    secure: true,
+    sameSite: "none",
+  });
+  res.json({
+    user: { role: "" },
+    token: "",
+    success: false,
+    msg: "Logged out Successfully.",
+    orders: [],
+  });
 });
 
 module.exports = {

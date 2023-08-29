@@ -13,12 +13,11 @@ const Salon = () => {
   const dispatch = useDispatch();
   const { salonName } = useParams();
 
+  const { user } = useSelector((state) => state.user);
   const { currentSalon } = useSelector((state) => state.salons);
   const { services } = useSelector((state) => state.services);
 
-  console.log("hello", currentSalon);
   useEffect(() => {
-    console.log("hello", salonName);
     const fetchSalonDetails = async () => {
       await dispatch(getSpecificSalonDetails_SalonName(salonName));
     };
@@ -40,14 +39,14 @@ const Salon = () => {
         <Header />
         <div className="salon-view">
           <div className="salon-view-img">
-            <img src={`${currentSalon[0].logo}`} alt="" />
+            <img src={`${currentSalon[0].logo}`} alt="logo not supported" />
           </div>
           <div className="salon-view-description">
             <h3>{currentSalon[0].name}</h3>
             <p className="p1">{currentSalon[0].address}</p>
             <div className="dash"></div>
             <p className="p2">
-              {currentSalon[0].Schedules} | {currentSalon[0].time}{" "}
+              {currentSalon[0].Schedules | currentSalon[0].time}
             </p>
             {/*10:00 am - 8:00 pm*/}
           </div>

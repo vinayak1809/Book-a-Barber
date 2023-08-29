@@ -35,7 +35,7 @@ const HomePage = () => {
         {/* head video */}
         <div class="video">
           <video muted autoPlay={"autoplay"} preLoad="auto" loop>
-            <source src="/Videos/video1.mp4" type="video/mp4" />
+            <source src="/Videos/Fire-Barber-Shop.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -63,7 +63,9 @@ const HomePage = () => {
           </p>
           <div className="textarea">
             <input placeholder="rahul@gmail.com"></input>
-            <button>subscribe</button>
+            <Link to="/Signup">
+              <button className="subscribe-btn">subscribe</button>
+            </Link>
           </div>
         </div>
 
@@ -75,7 +77,7 @@ const HomePage = () => {
         {/* Salons */}
         <div className="homePage-salons">
           {salons.map((link, index) => (
-            <Link to={`/Salon/${link.name}`}>
+            <Link style={{ textDecoration: "none" }} to={`/Salon/${link.name}`}>
               <div className="homePage-salon">
                 <img src={link.logo} alt="not supported"></img>
                 <h3> {link.name} </h3>
