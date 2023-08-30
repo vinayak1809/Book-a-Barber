@@ -6,7 +6,7 @@ import { createUser,checkLoginDetails } from "../../features/user/userSlice";
 import {  Navigate,useNavigate } from 'react-router-dom';
 
 const RightSideSignUp = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //option logic
@@ -17,11 +17,16 @@ const RightSideSignUp = () => {
 
   useEffect(() => {
     setLoginSignup(userOption);
-  }, [userOption]);
+    if(user.role === "user"){
+      navigate("/Salons")
+    }else if(user.role === "barber"){
+      navigate("/")
+    }
+  }, [dispatch,userOption,user]);
 
   const changeOption = () =>{
       dispatch(useroptionLogin(!loginSignup))  
-    }
+  }
  
     //register logic
 
@@ -43,17 +48,13 @@ const RightSideSignUp = () => {
         dispatch(createUser(userDetails));
       }else{
         dispatch(checkLoginDetails(userDetails));
-        if(user.role === "user"){
-          navigate("/Salons")
-        }else{
-          navigate("/")
-        }
+       
       }
     }
     
   return (
 <>
-    {user && <Navigate to="/" replace={true}></Navigate>}
+    {user.role && <Navigate to="/" replace={true}></Navigate>}
     <div className="signup-login">
       <div className="heading">
         Begin your journey with

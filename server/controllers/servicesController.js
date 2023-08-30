@@ -22,10 +22,10 @@ const getServicesForChossedCategory = catchAsyncErrors(async (req, res) => {
 
   if (tag === "All") {
     const salon = await Services.find().populate("salonID");
-    res.status(200).json({ services: salon });
+    return res.status(200).json({ services: salon });
   }
   const salon = await Services.find({ tag: tag }).populate("salonID");
-  res.status(200).json({ services: salon });
+  return res.status(200).json({ services: salon });
 });
 
 module.exports = {

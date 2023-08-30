@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { persistStore } from "redux-persist";
-
 import axios from "axios";
 
 const initialState = {
@@ -68,7 +66,8 @@ export const logout = createAsyncThunk("user/logout", async () => {
       withCredentials: true,
     });
 
-    persistStore().purge();
+    localStorage.removeItem("persist:root");
+
     return response.data;
   } catch (error) {
     console.log(error, "error in logout");

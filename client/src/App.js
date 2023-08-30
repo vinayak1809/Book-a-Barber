@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
+import axios from "axios";
 import HomePage from "./pages/Home/HomePage";
 import SignUpLogin from "./pages/Signup-login/signUp-Login";
 import SalonsPage from "./pages/SalonsPage/SalonsPage";
@@ -13,7 +14,7 @@ import AddService from "./pages/Add-Service/AddService";
 import DatePayment from "./pages/Date-Payment/DatePayment";
 import Orders from "./pages/Orders/Orders";
 
-//axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 function App() {
   const { user } = useSelector((state) => state.user);

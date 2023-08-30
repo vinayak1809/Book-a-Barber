@@ -38,8 +38,6 @@ const getUserAppointments = catchAsyncErros(async (req, res) => {
 });
 
 const logout = catchAsyncErros(async (req, res, next) => {
-  console.log("logout");
-
   res.cookie("token", "", {
     httpOnly: true,
     expires: new Date(0),
