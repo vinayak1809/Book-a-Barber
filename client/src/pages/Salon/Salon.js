@@ -46,7 +46,7 @@ const Salon = () => {
             <p className="p1">{currentSalon[0].address}</p>
             <div className="dash"></div>
             <p className="p2">
-              {currentSalon[0].Schedules | currentSalon[0].time}
+              {currentSalon[0].Schedules} | {currentSalon[0].time}
             </p>
             {/*10:00 am - 8:00 pm*/}
           </div>

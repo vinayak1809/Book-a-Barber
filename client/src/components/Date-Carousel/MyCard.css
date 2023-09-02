@@ -33,3 +33,7 @@
     background: crimson;
     color: white;
   }
+
+.sub-time{
+    cursor: pointer;
+}

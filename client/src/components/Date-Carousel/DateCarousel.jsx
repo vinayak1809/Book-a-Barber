@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './DateCarousel.css';
 import MyCard from './MyCard';
 
 const dates = [
   {
-    date: "12 Sep",
+    date: "12-09-2023",
     time: [
       "12:00",
       "13:00",
@@ -15,7 +15,7 @@ const dates = [
       "18:00",
       "19:00",
     ]},{
-    date: "13 Sep",
+    date: "13-09-2023",
     time: [
       "12:00",
       "13:00",
@@ -26,7 +26,7 @@ const dates = [
       "18:00",
       "19:00",
     ]},{
-    date: "14 Sep",
+    date: "14-09-2023",
     time: [
       "12:00",
       "13:00",
@@ -37,7 +37,7 @@ const dates = [
       "18:00",
       "19:00",
     ]},{
-    date: "15 Sep",
+    date: "15-09-2023",
     time: [
       "12:00",
       "13:00",
@@ -48,7 +48,7 @@ const dates = [
       "18:00",
       "19:00",
     ]},{
-    date: "16 Sep",
+    date: "16-09-2023",
     time: [
       "12:00",
       "13:00",
@@ -59,7 +59,7 @@ const dates = [
       "18:00",
       "19:00",
     ]},{
-    date: "17 Sep",
+    date: "17-09-2023",
     time: [
       "12:00",
       "13:00",
@@ -74,20 +74,29 @@ const dates = [
 ];
 
 const DateCarousel = (props) => {
-  let box = document.querySelector('.date-container');
-
   const [count,setCount] = useState(0);
+  const [date,setDate] = useState(dates[0].date);
 
   const btnPrev = (event) => { 
     event.preventDefault();
+    const box = document.querySelector('.date-container');
     box.scrollLeft -=300;
-    setCount(count-1);
+    
+    if (count > 0){
+      setCount(count - 1)
+      setDate(dates[count-1].date)
+    } 
   }
 
   const btnNext = (event) => {
     event.preventDefault();
+    const box = document.querySelector('.date-container');
     box.scrollLeft += 270;
-    setCount(count+1)
+    
+    if(count < dates.length){
+      setCount(count+1)
+      setDate(dates[count+1].date)
+    }
   }
 
   return (
@@ -98,7 +107,7 @@ const DateCarousel = (props) => {
     
         <div className='date-container'>
         {dates.map((link,index)=>(
-             <MyCard date={link.date} count={dates[count].date} time={link.time}/>
+             <MyCard date={link.date} currDate={date} count={dates[count].date} cardNo={index} time={link.time}/>
         ))}
         </div>
     </div>

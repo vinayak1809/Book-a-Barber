@@ -11,12 +11,15 @@ const Services = (props) => {
   const { services,salonName }= props;
   const { user } = useSelector((state) => state.user);
 
-  const redirectTo = (service,tagname) => {
+  const redirectTo = async (service,tagname) => {
     const action = {
       service:service,
       tagname:tagname
     }
    dispatch(setChoosedService(action))
+   
+   await new Promise((resolve) => setTimeout(resolve, 100));
+
    user.role === "user" ? navigate(`/Salon/${user.fullname}/${salonName}/select-date`)
    :
    navigate("/signup")

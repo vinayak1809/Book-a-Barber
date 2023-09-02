@@ -1,11 +1,10 @@
 import "./DatePayment.css";
 import DateCarousel from "../../components/Date-Carousel/DateCarousel";
 
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const DatePayment = () => {
-  const { salonName } = useParams();
   const { user } = useSelector((state) => state);
   const { choosedService } = useSelector((state) => state.services);
 

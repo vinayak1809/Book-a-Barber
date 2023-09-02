@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 import axios from "axios";
 import HomePage from "./pages/Home/HomePage";
@@ -19,17 +18,10 @@ axios.defaults.withCredentials = true;
 function App() {
   const { user } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    return;
-  }, []);
-
-  useEffect(() => {
-    user.role === "user" && <Navigate to="/Salons" replace={true}></Navigate>;
-  }, [user]);
-
   return (
     <div className="App">
       <BrowserRouter>
+        {user.role === "user" && <Navigate to="/Salons" />};
         <Routes>
           {user.role === "user" ? (
             <>
