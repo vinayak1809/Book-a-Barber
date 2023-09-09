@@ -7,19 +7,22 @@
 
 ## Setup
 
-```
-Client-side :-
- 
-$ cd Client
-$ npm i
-$ npm start
+### Client-side (Frontend)
 
-Server-side :-
+ ```bash
+ $ cd Client
+ $ npm install
+ $ npm start
+ ```
 
-$ cd Server
-$ npm i
-$ npm start
-``` 
+### Server-side (Backend)
+
+ ```bash
+ $ cd Server
+ $ npm install
+ $ npm start
+ ```
+
 ## Design
 ### Database: 
 
