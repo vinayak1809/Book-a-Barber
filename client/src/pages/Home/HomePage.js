@@ -33,8 +33,8 @@ const HomePage = () => {
         </div>
 
         {/* head video */}
-        <div class="video">
-          <video muted autoPlay={"autoplay"} preLoad="auto" loop>
+        <div className="video">
+          <video muted autoPlay={"autoplay"} preload="auto" loop>
             <source src="/Videos/Fire-Barber-Shop.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
