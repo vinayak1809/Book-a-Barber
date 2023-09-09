@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-const { connection } = require("./config/database");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
+const { connection } = require("./config/database");
+const errorMiddleware = require("./middleware/errorMiddleware");
 
 const app = express();
 
@@ -22,7 +24,9 @@ app.use(require("./routes/appointmentRoutes"));
 
 connection;
 
+app.use(errorMiddleware);
 app.use(cookieParser());
+
 app.get("/api/getKey", (req, res) =>
   res
     .status(200)

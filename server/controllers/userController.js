@@ -16,12 +16,12 @@ const checkLoginDetails = catchAsyncErros(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email }).select("+password");
 
+  !user && next(new ErrorHandler("User not found", 400));
+
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    return res
-      .status(401)
-      .json({ success: false, error: "Password incorrect" });
+    return next(new ErrorHandler("Password incorrect", 401));
   }
 
   sendtoken(user, 200, res);
@@ -29,7 +29,7 @@ const checkLoginDetails = catchAsyncErros(async (req, res, next) => {
 
 const checkForUser_Token = catchAsyncErros(async (req, res, next) => {
   if (!req.token) {
-    return res.status(401).json({ error: "token doesn't exist " });
+    return next(new ErrorHandler("token doesn't exist ", 401));
   }
   return res
     .status(200)
