@@ -1,7 +1,9 @@
 const catchAsyncErros = require("../middleware/catchAsyncErros");
+const ErrorHandler = require("../utils/errorHandler");
+const sendtoken = require("./../utils/jwtToken");
+
 const User = require("../models/user");
 const Appointment = require("../models/Appointments");
-const sendtoken = require("./../config/jwtToken");
 
 const registerUser = catchAsyncErros(async (req, res, next) => {
   const user = new User({ ...req.body });
@@ -17,7 +19,9 @@ const checkLoginDetails = catchAsyncErros(async (req, res, next) => {
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    res.status(400).json({ success: false, message: "Password incorrect" });
+    return res
+      .status(401)
+      .json({ success: false, error: "Password incorrect" });
   }
 
   sendtoken(user, 200, res);
@@ -25,16 +29,18 @@ const checkLoginDetails = catchAsyncErros(async (req, res, next) => {
 
 const checkForUser_Token = catchAsyncErros(async (req, res, next) => {
   if (!req.token) {
-    res.status(200).json({ user: { role: "" }, success: false, token: "" });
+    return res.status(401).json({ error: "token doesn't exist " });
   }
-  res.status(200).json({ user: req.user, success: true, token: req.token });
+  return res
+    .status(200)
+    .json({ user: req.user, success: true, token: req.token });
 });
 
 const getUserAppointments = catchAsyncErros(async (req, res) => {
   const userID = req.user._id;
   const orders = await Appointment.find({ userId: userID });
 
-  res.status(200).json({ orders: orders, success: true });
+  return res.status(200).json({ orders: orders, success: true });
 });
 
 const logout = catchAsyncErros(async (req, res, next) => {
