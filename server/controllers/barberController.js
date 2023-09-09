@@ -44,7 +44,7 @@ const registerSchedules = catchAsyncErrors(async (req, res) => {
     schedule = await Schedules.create({ ...req.body });
   }
 
-  res.status(201).json({ s: schedule });
+  res.status(201).json({ schedules: schedule });
 });
 
 module.exports = {

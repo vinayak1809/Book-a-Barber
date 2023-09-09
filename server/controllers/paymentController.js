@@ -1,8 +1,10 @@
 const checkAsyncErrors = require("./../middleware/catchAsyncErros");
+const ErrorHandler = require("../utils/errorHandler");
 
-const Appointment = require("./../models/Appointments");
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+
+const Appointment = require("./../models/Appointments");
 
 const instance = new Razorpay({
   key_id: process.env.RZP_KEY_ID,
@@ -56,7 +58,7 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
       `http://localhost:3000/Orders?reference=${razorpay_payment_id}`
     );
   } else {
-    res.status(400).json({ message: "payment  unsuccessfull", status: false });
+    return new next(ErrorHandler("payment  unsuccessfull", 400));
   }
 });
 
