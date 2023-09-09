@@ -8,6 +8,7 @@ const initialState = {
   },
   token: "",
   orders: [],
+  error: "",
 };
 
 export const createUser = createAsyncThunk(
@@ -38,7 +39,7 @@ export const checkLoginDetails = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      throw error;
+      return error.response.data;
     }
   }
 );
@@ -55,7 +56,8 @@ export const checkForUser_Token = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error, "error in check for use token");
+      return error.response.data;
+      //console.log(error, "error in check for use token");
     }
   }
 );
@@ -70,7 +72,8 @@ export const logout = createAsyncThunk("user/logout", async () => {
 
     return response.data;
   } catch (error) {
-    console.log(error, "error in logout");
+    return { error: "something went wrong cannot logout" };
+    //console.log(error, "error in logout");
   }
 });
 
@@ -86,7 +89,8 @@ export const getUserAppointments = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error, "error in fetching user order");
+      return { error: "something went wrong" };
+      //console.log(error, "error in fetching user order");
     }
   }
 );
@@ -99,7 +103,7 @@ export const userSlice = createSlice({
       return;
     },
     [checkLoginDetails.fulfilled]: (state, action) => {
-      return { ...action.payload };
+      return { ...state, ...action.payload };
     },
     [checkForUser_Token.fulfilled]: (state, action) => {
       return { ...action.payload };
