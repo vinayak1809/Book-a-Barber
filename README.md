@@ -30,6 +30,7 @@
   * Barber Table: Keeps track of registered barbers
   * Services Table: Manages available services provided by Barber
   * Appointment Table: Tracks user appointments
+  * Schedules Table: Stores Salons available appoinments
   * Review Table: Stores user reviews and ratings
 
 ## Tech Stack
