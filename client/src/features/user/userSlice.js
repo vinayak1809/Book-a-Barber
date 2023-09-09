@@ -102,6 +102,9 @@ export const userSlice = createSlice({
     [createUser.fulfilled]: (state, action) => {
       return;
     },
+    [checkLoginDetails.pending]: (state, action) => {
+      state.error = "";
+    },
     [checkLoginDetails.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
     },
