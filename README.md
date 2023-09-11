@@ -5,7 +5,7 @@
 
 [![Video Thumbnail]("")](https://github.com/vinayak1809/Book-a-Barber/assets/63184281/1565d4c0-10cc-4927-9cc7-5acb2bc7e5f8)
 
-# Features
+## Features
 
 ### User Features
   - **User Registration:** Users can create a new account with secure password encryption using bcrypt.
