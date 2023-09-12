@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {user.role === "user" && <Navigate to="/Salons" />};
+        {user.role === "user" && <Navigate to="/Salons" />}
         <Routes>
           {user.role === "user" ? (
             <>

@@ -11,7 +11,7 @@ main.main-homePage{
 }
 
 .head h1 {
-  font-size: 12.5em; 
+  font-size: 12vw; 
   margin-bottom: 10px;
   margin-top: 0px;
   padding-top: 100px;
@@ -20,7 +20,7 @@ main.main-homePage{
 .head p {
   font-size: 1em;
   color: #555454;
-  padding: 20px 400px;
+  padding: 20px 30%;
   color: black;
 }
 
@@ -29,11 +29,11 @@ main.main-homePage{
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 80px ;
 }
 
 .video video {
-  width: 900px;
+  width: 75vw;
   border-radius: 20px; 
 }
 
@@ -52,7 +52,7 @@ main .book-appointment{
 
   >p{
     font-size: 1.5em;
-    padding: 0px 400px;
+    padding: 0px 30%;
     text-align: center;
   }
 
@@ -77,14 +77,14 @@ main .barber-signup{
   margin:0px 0px 100px;
 
   >h6{
-
-    font-size: 8.5em;
-    margin:200px 0px 30px;
+    font-size:11vw;
+    align-self: center;
+    margin:200px auto 30px;
   }
 
   >p{
     font-size: 1.1em;
-    padding: 0px 400px;
+    padding: 0px 30%;
     text-align: center;
   }
 
@@ -207,19 +207,11 @@ main .got-questions{
 }
 
 @media (max-width: 767px) {
-  .head h1 {
-    font-size: 7.5em;
-  }
+
   .head p {
-    font-size: 0.9em; 
-    color: #666;
-    padding: 0px 100px;
+    padding: 20px 10%;
   }
 
-  main .video {
-    width: 80%;
-    align-self: center;
-  }  
 
   main .book-appointment p{
       font-size: 1.5em;
@@ -227,15 +219,6 @@ main .got-questions{
       text-align: center;
   }
 
-  main .barber-signup{
-    >h6{
-      font-size: 5.1em;
-    }
-  
-    >p{
-      padding: 0px 100px;
-    }
-  }
 
   main .image{
     height: 600px;
