@@ -10,7 +10,7 @@ main .salon-view{
     flex-direction: row;
     background-color: rgb(223, 223, 223);
     width: 80%;
-    margin:20px auto;
+    margin:100px auto;
     padding: 20px;
     border-radius: 10px;
     gap: 100px;

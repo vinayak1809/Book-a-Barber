@@ -47,11 +47,11 @@ main .book-appointment{
   > h3{
     font-size: 2.5em;
     font-weight: 700;
-    margin: 0px auto 50px;
+    margin: 0px auto 20px;
   }
 
   >p{
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding: 0px 30%;
     text-align: center;
   }
@@ -107,13 +107,16 @@ main .barber-signup{
 }
 
 .subscribe-btn{
-  cursor: pointer;
   outline: none;
   border: none;
   background-color: white;
   border-radius: 5px;
   width: 100px;
   padding: 17px 0px;
+}
+
+a button{
+  cursor: pointer;
 }
 
 main .image{
@@ -166,9 +169,13 @@ main .homePage-salons{
 
 }
 
-.more-link:hover {
-  color: #0056b3; 
-  font-size: 1.2em;
+.more-text:hover { 
+  color: rgb(153, 79, 79);
+  cursor: pointer;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
 }
 
 .more-text {
@@ -232,6 +239,11 @@ main .got-questions{
     }
   }
 
+  main .homePage-salons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
   main .salons{
     flex-direction: column;

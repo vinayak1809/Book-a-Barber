@@ -1,12 +1,12 @@
 
 .navbar{
-  position: sticky;
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 85%;
-  margin: 0px auto;
+  width: 85vw;
+  margin: 10px calc(15vw/2);
   padding: 10px 20px;
   box-sizing: border-box;
   border-radius: 25px;
