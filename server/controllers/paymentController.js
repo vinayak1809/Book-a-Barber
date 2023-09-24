@@ -25,7 +25,6 @@ const checkout = checkAsyncErrors(async (req, res) => {
     totalAmount: order.amount,
   };
 
-  console.log(postData, "postData");
   const appointment = await new Appointment({ ...postData });
   appointment.save();
 
@@ -36,6 +35,7 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
     req.body;
 
+  console.log("hello peter2");
   const body = razorpay_order_id + "|" + razorpay_payment_id;
 
   const expected_signature = crypto
@@ -44,7 +44,7 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
     .digest("hex");
 
   if (expected_signature === razorpay_signature) {
-    const appointment = Appointment.findOneAndUpdate(
+    Appointment.findOneAndUpdate(
       { razorpay_order_id: razorpay_order_id },
       {
         razorpay_payment_id: razorpay_payment_id,
@@ -52,13 +52,15 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
         status: true,
       },
       { new: true }
-    ).then((done) => console.log(done, "appoinment updated "));
+    ).then((done) => {
+      res.status(200).json({ status: true, orders: done });
+    });
 
-    res.redirect(
-      `http://localhost:3000/Orders?reference=${razorpay_payment_id}`
-    );
+    // res.redirect(
+    //   `http://localhost:3000/Orders?reference=${razorpay_payment_id}`
+    // );
   } else {
-    return new next(ErrorHandler("payment  unsuccessfull", 400));
+    return new next(ErrorHandler("payment unsuccessfull", 400));
   }
 });
 

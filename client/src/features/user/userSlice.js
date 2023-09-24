@@ -95,6 +95,26 @@ export const getUserAppointments = createAsyncThunk(
   }
 );
 
+export const paymentVerification = createAsyncThunk(
+  "user/paymentVerification",
+  async (response2) => {
+    try {
+      console.log("hello peter", response2);
+      const response = await axios.post(
+        "http://localhost:4000/payment-verification",
+        response2,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data, "response.data");
+      return response.data;
+    } catch (error) {
+      return { error: "something went wrong" };
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -115,6 +135,9 @@ export const userSlice = createSlice({
       return { ...state, ...action.payload };
     },
     [logout.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    [paymentVerification.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
     },
   },

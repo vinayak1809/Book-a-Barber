@@ -18,13 +18,15 @@ const getSpecificSalonServices = catchAsyncErrors(async (req, res) => {
 });
 
 const getServicesForChossedCategory = catchAsyncErrors(async (req, res) => {
-  const tag = req.params.category;
+  const tag = req.params.category.toLowerCase();
 
-  if (tag === "All") {
+  if (tag === "all") {
     const salon = await Services.find().populate("salonID");
     return res.status(200).json({ services: salon });
   }
+
   const salon = await Services.find({ tag: tag }).populate("salonID");
+
   return res.status(200).json({ services: salon });
 });
 
