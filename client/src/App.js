@@ -24,6 +24,7 @@ function App() {
         <Routes>
           {user.role === "user" ? (
             <>
+              <Route path="/" element={<Navigate to="/Salons" />} />
               <Route path={`/Salon/:username/:salonName`} element={<Salon />} />
               <Route path="/Salons" element={<SalonsPage />} />
               <Route
