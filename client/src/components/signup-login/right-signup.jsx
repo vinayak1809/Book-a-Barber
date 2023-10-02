@@ -18,15 +18,19 @@ const RightSideSignUp = () => {
   useEffect(() => {
     setLoginSignup(userOption);
 
-    error && alert(error)
-
     if(user.role === "user"){
       navigate("/Salons")
     }else if(user.role === "barber"){
       navigate("/")
     }
-  }, [dispatch,userOption,user,error]);
+  }, [dispatch,userOption,user]);
 
+
+  useEffect(() => {
+    error && alert(error)
+  },[error])
+
+  
   const changeOption = () =>{
       dispatch(useroptionLogin(!loginSignup))  
   }
