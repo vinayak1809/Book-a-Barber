@@ -5,8 +5,7 @@ import { getSpecificSalonDetails_ID } from "../../features/Salons/salonsSlice";
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const BarberHome = () => {
   const { user } = useSelector((state) => state.user);
@@ -21,15 +20,15 @@ const BarberHome = () => {
 
   return (
     <>
-      <Header />
       <div className="barber-home">
+        <Header />
         {user.role && currentSalon.length > 0 ? (
           <>
-            <button>Check Schedules</button>
-            <button>Update Salon</button>
+            <h2 style={{ color: "white" }}>Check Schedules</h2>
           </>
         ) : (
           <>
+            <h3>Steps to register Salon</h3>
             <button onClick={() => RegisterSalon()}>
               <Link to="/register-salon">Register Salon</Link>
             </button>

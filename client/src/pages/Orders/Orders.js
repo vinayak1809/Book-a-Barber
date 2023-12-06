@@ -20,7 +20,7 @@ const Orders = () => {
       <div className="orders-page">
         <div className="upcoming-orders">
           <h2>Upcoming</h2>
-          {orders.services.map((link, index) => (
+          {orders.map((link, index) => (
             <div className="up-order">
               <h4>August 25,2011</h4>
               <p>{link.serviceName}</p>
