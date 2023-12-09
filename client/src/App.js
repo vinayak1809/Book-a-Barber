@@ -31,15 +31,14 @@ function App() {
                 path={`/Salon/:username/:salonName/select-date`}
                 element={<DatePayment />}
               />
-              <Route path="/logout" element={<Navigate to="/" />} />
-              <Route path="/Orders" element={<Orders />}></Route>
+              <Route path="/Orders" element={<Orders />} />
             </>
           ) : user.role === "barber" ? (
             <>
               <Route path="/" element={<BarberHome />} />
               <Route path="/Services" element={<AddService />} />
               <Route path={`/Salon/:username/:salonName`} element={<Salon />} />
-              <Route path="/register-salon" element={<RegisterSalon />}></Route>
+              <Route path="/register-salon" element={<RegisterSalon />} />
             </>
           ) : (
             <>
@@ -51,6 +50,7 @@ function App() {
 
           <Route path="/signup" element={<SignUpLogin />} />
           <Route path="/Product" element={<NotFound />} />
+          <Route path="/logout" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </div>
