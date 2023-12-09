@@ -1,5 +1,7 @@
 const errorMiddleware = (err, req, res, next) => {
-  console.log(err.statusCode, err.message, "msg");
+  if (err.message == "jwt expired") {
+    return res.status(200).json({ success: false, error: err.message });
+  }
 
   return res
     .status(err.statusCode)
