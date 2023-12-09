@@ -48,7 +48,7 @@ const Header = () => {
           //{ name: "Services", path: "/Services" }
         { name: "user", path: "/User" },
         { name: "Schedules", path: "/Schedules" },
-        { name: "logout",path: "/logout",on:() => {
+        { name: "Logout", path: "/logout",on:() => {
           dispatch(logout())
           navigate('/')
         }},
