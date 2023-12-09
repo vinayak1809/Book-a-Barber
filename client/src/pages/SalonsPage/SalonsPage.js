@@ -33,10 +33,10 @@ const SalonsPage = () => {
             onChange={(e) => setService(e.target.value)}
           >
             <option value="All">All</option>
-            <option value="Haircut">Haircut</option>
-            <option value="Beard">Beard</option>
-            <option value="Facial">Facial</option>
-            <option value="Massage">Massage</option>
+            <option value="hair">Haircut</option>
+            <option value="beard">Beard</option>
+            <option value="facial">Facial</option>
+            <option value="massage">Massage</option>
           </select>
         </div>
         <Salons user={user} salons={services} />
