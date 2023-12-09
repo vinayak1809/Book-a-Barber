@@ -22,7 +22,7 @@ const Orders = () => {
           <h2>Upcoming</h2>
           {orders.map((link, index) => (
             <div className="up-order">
-              <h4>August 25,2011</h4>
+              <h4>{link.date}</h4>
               <p>{link.serviceName}</p>
             </div>
           ))}
