@@ -30,7 +30,8 @@ export const registerService = createAsyncThunk(
         `http://localhost:4000/register-specific-salon-service`,
         serviceDetails
       );
-      return service;
+      console.log(service, "service");
+      return service.data;
     } catch (error) {
       throw error; //
     }
@@ -78,7 +79,7 @@ export const salonServiceSlice = createSlice({
       return { ...action.payload };
     },
     [registerService.fulfilled]: (state, action) => {
-      return { ...action.payload };
+      return { ...state, ...action.payload };
     },
     [setChoosedService.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
