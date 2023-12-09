@@ -2,7 +2,26 @@ const Services = require("../models/Services");
 const catchAsyncErrors = require("../middleware/catchAsyncErros");
 
 const registerSpecificSalonService = catchAsyncErrors(async (req, res) => {
-  const services = await new Services({ ...req.body });
+  let services;
+
+  const { tag, salonID, userID } = req.body;
+
+  const service = await Services.find({
+    tag: tag,
+    salonID: salonID,
+    userID: userID,
+  });
+
+  if (service.length !== 0) {
+    services = await Services.findOneAndUpdate(
+      { tag: tag, salonID: salonID, userID: userID },
+      { $push: { types: { $each: [{ ...req.body.types }] } } },
+      { new: true }
+    );
+  } else {
+    services = await new Services({ ...req.body });
+  }
+
   services.save();
   res.status(201).json({ message: "service registered" });
 });
