@@ -26,7 +26,7 @@ const MyCard = (props) => {
        serviceID:choosedService._id,serviceName:choosedService.types[0].name
      }],
      time: time,
-     date: new Date,
+     date: new Date(),
      status: false,
      totalAmount: 100,
    };
