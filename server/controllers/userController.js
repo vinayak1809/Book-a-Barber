@@ -38,7 +38,14 @@ const checkForUser_Token = catchAsyncErros(async (req, res, next) => {
 
 const getUserAppointments = catchAsyncErros(async (req, res) => {
   const userID = req.user._id;
-  const orders = await Appointment.find({ userId: userID });
+  let orders = await Appointment.find({ userId: userID });
+
+  orders = orders.map((order) => {
+    const modifiedOrder = { ...order };
+    modifiedOrder.date = order.date.toDateString();
+
+    return modifiedOrder;
+  });
 
   return res.status(200).json({ orders: orders, success: true });
 });
