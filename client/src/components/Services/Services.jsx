@@ -39,9 +39,12 @@ const Services = (props) => {
                     {link.types.map((link2,index)=>(
                       <div className="tagname">
                         <p>{link2.name}</p>
+                        {
+                        user.role !== "barber" &&
                         <div className='service-book-btn'>
                             <button onClick={()=>redirectTo(link,link2.name)}>Book</button>
                         </div>
+                        }
                       </div>
                     ))}
 
