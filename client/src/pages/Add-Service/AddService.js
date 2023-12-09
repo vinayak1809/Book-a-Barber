@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 const AddService = () => {
   const { user } = useSelector((state) => state.user);
   const { services } = useSelector((state) => state.services);
-  const { salons } = useSelector((state) => state.salons);
+  const { salons, currentSalon } = useSelector((state) => state.salons);
 
   const dispatch = useDispatch();
 
@@ -18,6 +18,7 @@ const AddService = () => {
   const [description, setDescription] = useState();
   const [duration, setDuration] = useState();
   const [price, setPrice] = useState();
+  const [tag, setTag] = useState("hair");
 
   useEffect(() => {
     dispatch(getSpecificSalonServices(salons[0]._id));
@@ -27,12 +28,16 @@ const AddService = () => {
     e.preventDefault();
     const serviceDetails = {
       userID: user._id,
-      salonID: "64b19d77f38e601b1633f29f",
-      name: name,
-      description: description,
-      duration: duration,
-      price: price,
+      salonID: currentSalon[0]._id,
+      tag: tag,
+      types: {
+        name: name,
+        description: description,
+        duration: duration,
+        price: price,
+      },
     };
+    console.log(serviceDetails, "serviceDetails");
     dispatch(registerService(serviceDetails));
   };
 
@@ -49,6 +54,15 @@ const AddService = () => {
               type="text"
               onChange={(e) => setName(e.target.value)}
             ></input>
+          </li>
+          <li>
+            <label>Tag : </label>
+            <select onChange={(e) => setTag(e.target.value)}>
+              <option value="hair">Haircut</option>
+              <option value="beard">Beard</option>
+              <option value="facial">Facial</option>
+              <option value="massage">Massage</option>
+            </select>
           </li>
           <li>
             <label>Description : </label>

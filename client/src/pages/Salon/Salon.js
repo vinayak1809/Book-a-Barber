@@ -8,6 +8,7 @@ import { getSpecificSalonServices } from "../../features/services/servicesSlice"
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AddService from "../Add-Service/AddService";
 
 const Salon = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,11 @@ const Salon = () => {
           </div>
         </div>
         <div className="salon-services">
-          <Services salonName={currentSalon[0].name} services={services} />
+          {user.role !== "barber" ? (
+            <Services salonName={currentSalon[0].name} services={services} />
+          ) : (
+            <AddService />
+          )}
         </div>
       </main>
     </>
