@@ -12,6 +12,8 @@ import RegisterSalon from "./pages/Register-Salon/RegisterSalon";
 import AddService from "./pages/Add-Service/AddService";
 import DatePayment from "./pages/Date-Payment/DatePayment";
 import Orders from "./pages/Orders/Orders";
+import Schedules from "./pages/Schedules/Schedules";
+import Profile from "./pages/Profile/Profile";
 
 axios.defaults.withCredentials = true;
 
@@ -39,6 +41,8 @@ function App() {
               <Route path="/Services" element={<AddService />} />
               <Route path={`/Salon/:username/:salonName`} element={<Salon />} />
               <Route path="/register-salon" element={<RegisterSalon />} />
+              <Route path="/schedules" element={<Schedules />} />
+              <Route path="/User" element={<Profile />} />
             </>
           ) : (
             <>

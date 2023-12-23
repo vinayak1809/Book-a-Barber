@@ -71,6 +71,22 @@ export const getServicesForChossedCategory = createAsyncThunk(
   }
 );
 
+export const registerSalonSchedules = createAsyncThunk(
+  "salons/registerSalonSchedules",
+  async (schedule) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/register-salon-schedules",
+        schedule,
+        { withCredentials: true }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 export const salonServiceSlice = createSlice({
   name: "salonService",
   initialState,
