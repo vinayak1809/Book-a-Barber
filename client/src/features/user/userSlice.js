@@ -77,6 +77,7 @@ export const logout = createAsyncThunk("user/logout", async () => {
   }
 });
 
+//Normal User
 export const getUserAppointments = createAsyncThunk(
   "user/getUserAppointments",
   async () => {
@@ -91,6 +92,23 @@ export const getUserAppointments = createAsyncThunk(
     } catch (error) {
       return { error: "something went wrong" };
       //console.log(error, "error in fetching user order");
+    }
+  }
+);
+
+//User who is a Barber
+export const getBarborAppointments = createAsyncThunk(
+  "user/getBarberAppointments",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/get-barber-appointments/${id}`,
+        { withCredentials: true }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return { error: "something went wrong" };
     }
   }
 );
@@ -132,6 +150,9 @@ export const userSlice = createSlice({
       return { ...action.payload };
     },
     [getUserAppointments.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    [getBarborAppointments.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
     },
     [logout.fulfilled]: (state, action) => {

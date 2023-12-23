@@ -1,6 +1,7 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErros");
 const Barber = require("../models/Barbers");
 const Schedules = require("../models/Schedules");
+const Appointments = require("../models/Appointments");
 
 const registerSalon = async (req, res) => {
   const salon = await new Barber({ ...req.body });
@@ -23,6 +24,13 @@ const getSpecificSalonDetails_SalonName = catchAsyncErrors(async (req, res) => {
   const salonName = req.params.salonName;
   const salon = await Barber.find({ name: salonName });
   res.status(200).json({ currentSalon: salon });
+});
+
+const getBarberAppointments = catchAsyncErrors(async (req, res) => {
+  const { id } = req.params;
+
+  const appointments = await Appointments.find({ barberId: id });
+  res.status(200).json({ orders: appointments });
 });
 
 const registerSchedules = catchAsyncErrors(async (req, res) => {
@@ -52,5 +60,6 @@ module.exports = {
   getAllSalonDetails,
   getSpecificSalonDetails_ID,
   getSpecificSalonDetails_SalonName,
+  getBarberAppointments,
   registerSchedules,
 };
