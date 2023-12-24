@@ -9,6 +9,7 @@ const initialState = {
       logo: "",
     },
   ],
+  schedules: [],
 };
 
 export const registerSalon = createAsyncThunk(
@@ -84,6 +85,25 @@ export const getSalonsForChosedService = createAsyncThunk(
   }
 );
 
+export const getAllSalonSchedules = createAsyncThunk(
+  "salons/getAllSalonSchedules",
+  async (barberID) => {
+    try {
+      console.log(barberID);
+      const response = await axios.get(
+        `http://localhost:4000/get-all-salon-schedules/${barberID}`,
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+);
+
 export const salonsSlice = createSlice({
   name: "salons",
   initialState,
@@ -98,6 +118,9 @@ export const salonsSlice = createSlice({
       return { ...state, ...action.payload };
     },
     [getSpecificSalonDetails_SalonName.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    [getAllSalonSchedules.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
     },
   },
