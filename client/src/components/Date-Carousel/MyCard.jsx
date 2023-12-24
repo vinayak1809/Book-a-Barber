@@ -9,13 +9,13 @@ import { useNavigate } from 'react-router-dom';
 const MyCard = (props) => {
 
   const [time,setTime]= useState("");
-  
+  const [date,setDate] = useState("");
   const { user } = useSelector((state) => state.user);
   const { choosedService } = useSelector((state) => state.services);
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const createOrder = async (e) => {
 
    e.preventDefault();
@@ -26,7 +26,7 @@ const MyCard = (props) => {
        serviceID:choosedService._id,serviceName:choosedService.types[0].name
      }],
      time: time,
-     date: new Date(),
+     date: date,
      status: false,
      totalAmount: 100,
    };
@@ -73,12 +73,13 @@ const MyCard = (props) => {
 
 
 
-  const handleTimeClick = (time,datetete) => {
-    setTime(time);
+  const handleTimeClick = (time,date) => {
+    setTime(time.time);
+    setDate(date);
   };
 
   const getTimeStyle = (t,d) => {
-    if (time === t && props.currDate==d) {
+    if (time === t.time && props.currDate == d) {
       return {background: '#FFB700', color: 'black',border:"1px solid #d89c05" };
     }
     return {};
@@ -99,7 +100,7 @@ const MyCard = (props) => {
                 className={`sub-time mycard-${props.cardNo}`}
                 style={getTimeStyle(props.time[index],props.date)} 
                 onClick={() => handleTimeClick(props.time[index],props.date)}>
-                  {props.time[index]}
+                  {props.time[index].time}
                 </li>
               ))}
             </ul>
