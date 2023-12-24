@@ -59,6 +59,15 @@ const registerSalonSchedules = catchAsyncErrors(async (req, res) => {
   res.status(201).json({ schedules: schedule });
 });
 
+const getAllSalonSchedules = catchAsyncErrors(async (req, res) => {
+  const { barberId } = req.params;
+
+  console.log(barberId, "barberId");
+  const schedules = await Schedules.find({ barberId: req.params.barberId });
+
+  console.log(schedules, "schedules");
+  res.status(202).json({ schedules: schedules });
+});
 module.exports = {
   registerSalon,
   getAllSalonDetails,
@@ -66,4 +75,5 @@ module.exports = {
   getSpecificSalonDetails_SalonName,
   getBarberAppointments,
   registerSalonSchedules,
+  getAllSalonSchedules,
 };
