@@ -8,4 +8,16 @@ const registerAppointment = catchAsyncErrors(async (req, res) => {
   res.status(201).json({ success: true, message: "appointment saved" });
 });
 
-module.exports = { registerAppointment };
+const updateBarberAppointment = catchAsyncErrors(async (req, res) => {
+  const appointment = await Appointment.findById({ _id: req.params.id });
+
+  if (appointment) {
+    await Appointment.updateOne(
+      { _id: req.params.id },
+      { status: req.body.status }
+    );
+  }
+  res.status(202).json({ success: true, message: "Updated" });
+});
+
+module.exports = { registerAppointment, updateBarberAppointment };

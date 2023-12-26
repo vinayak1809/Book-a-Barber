@@ -3,7 +3,10 @@ const { isAuthenticatedUser } = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
-const { registerAppointment } = require("../controllers/appointmentController");
+const {
+  registerAppointment,
+  updateBarberAppointment,
+} = require("../controllers/appointmentController");
 const { paymentVerification } = require("../controllers/paymentController");
 const { getBarberAppointments } = require("../controllers/barberController");
 
@@ -17,5 +20,9 @@ router
 router
   .route("/get-barber-appointments/:id")
   .get(isAuthenticatedUser, getBarberAppointments);
+
+router
+  .route("/update-barber-appointment/:id")
+  .put(isAuthenticatedUser, updateBarberAppointment);
 
 module.exports = router;
