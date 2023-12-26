@@ -105,7 +105,6 @@ export const getBarborAppointments = createAsyncThunk(
         `http://localhost:4000/get-barber-appointments/${id}`,
         { withCredentials: true }
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return { error: "something went wrong" };

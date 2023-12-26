@@ -33,7 +33,7 @@ function App() {
                 path={`/Salon/:username/:salonName/select-date`}
                 element={<DatePayment />}
               />
-              <Route path="/Orders" element={<Orders />} />
+              <Route path="/Orders" element={<Schedules />} />
             </>
           ) : user.role === "barber" ? (
             <>

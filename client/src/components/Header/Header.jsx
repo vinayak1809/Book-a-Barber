@@ -32,8 +32,8 @@ const Header = () => {
   useEffect(() => {
     if (user.role === "user") {
       setLinks([
-        { name: "Edit-Profile", path: "/Edit-Profile" },
-        { name: "View-Profile", path: "/View-Profile" },
+        { name: "Notification", path: "/Notification" },
+        { name: "Profile", path: "/Profile" },
         { name: "Appointments", path: "/Orders" },
         { name: "Logout", path: "/logout",on:() => {
           dispatch(logout())
