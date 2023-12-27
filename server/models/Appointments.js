@@ -26,7 +26,7 @@ const AppointmentScehma = new Schema({
     },
   ],
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   time: {
