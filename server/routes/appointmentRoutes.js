@@ -7,15 +7,21 @@ const {
   registerAppointment,
   updateBarberAppointment,
 } = require("../controllers/appointmentController");
-const { paymentVerification } = require("../controllers/paymentController");
+
+const {
+  paymentVerification,
+  updateUserAppointment,
+} = require("../controllers/paymentController");
+
 const { getBarberAppointments } = require("../controllers/barberController");
 
 router
   .route("/register-appointment")
   .post(isAuthenticatedUser, registerAppointment);
+
 router
   .route("/payment-verification")
-  .post(isAuthenticatedUser, paymentVerification);
+  .put(isAuthenticatedUser, paymentVerification);
 
 router
   .route("/get-barber-appointments/:id")
@@ -24,5 +30,9 @@ router
 router
   .route("/update-barber-appointment/:id")
   .put(isAuthenticatedUser, updateBarberAppointment);
+
+router
+  .route("/update-user-appointment/:id")
+  .put(isAuthenticatedUser, updateUserAppointment);
 
 module.exports = router;

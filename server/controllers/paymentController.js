@@ -12,30 +12,39 @@ const instance = new Razorpay({
 });
 
 const checkout = checkAsyncErrors(async (req, res) => {
-  var options = {
-    amount: Number(req.body.totalAmount * 100),
-    currency: "INR",
-  };
-
-  const order = await instance.orders.create(options);
-
-  const postData = {
-    ...req.body,
-    razorpay_order_id: order.id,
-    totalAmount: order.amount,
-  };
-
-  const appointment = await new Appointment({ ...postData });
+  const appointment = await new Appointment({ ...req.body });
   appointment.save();
 
-  res.status(200).json({ status: true, order });
+  res.status(200).json({ status: true });
+});
+
+//payment related route
+const updateUserAppointment = checkAsyncErrors(async (req, res) => {
+  const app = Appointment.findById({ _id: req.params.id });
+
+  if (app) {
+    var options = {
+      amount: Number(req.body.totalAmount * 100),
+      currency: "INR",
+    };
+
+    const order = await instance.orders.create(options);
+
+    await Appointment.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        razorpay_order_id: order.id,
+      }
+    );
+
+    res.status(200).json({ status: true, order });
+  }
 });
 
 const paymentVerification = checkAsyncErrors(async (req, res) => {
   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
     req.body;
 
-  console.log("hello peter2");
   const body = razorpay_order_id + "|" + razorpay_payment_id;
 
   const expected_signature = crypto
@@ -44,17 +53,17 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
     .digest("hex");
 
   if (expected_signature === razorpay_signature) {
-    Appointment.findOneAndUpdate(
+    const a = await Appointment.findOneAndUpdate(
       { razorpay_order_id: razorpay_order_id },
       {
         razorpay_payment_id: razorpay_payment_id,
         razorpay_signature: razorpay_signature,
-        status: true,
+        status: "payment-done",
       },
       { new: true }
-    ).then((done) => {
-      res.status(200).json({ status: true, orders: done });
-    });
+    );
+
+    res.status(200).json({ status: true, orders: a });
 
     // res.redirect(
     //   `http://localhost:3000/Orders?reference=${razorpay_payment_id}`
@@ -64,4 +73,4 @@ const paymentVerification = checkAsyncErrors(async (req, res) => {
   }
 });
 
-module.exports = { checkout, paymentVerification };
+module.exports = { checkout, updateUserAppointment, paymentVerification };

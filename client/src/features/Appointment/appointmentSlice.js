@@ -31,6 +31,21 @@ export const registerAppointment = createAsyncThunk(
   }
 );
 
+export const updateBarberAppointment = createAsyncThunk(
+  "user/updateBarberAppointment",
+  async (info) => {
+    try {
+      const response = axios.put(
+        `http://localhost:4000/update-barber-appointment/${info.id}`,
+        { status: info.status },
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      return { error: "something went wrong" };
+    }
+  }
+);
 export const appointmentSlice = createSlice({
   name: "appointment",
   initialState,
