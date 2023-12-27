@@ -4,7 +4,6 @@ const {
   registerUser,
   checkLoginDetails,
   checkForUser_Token,
-  getUserAppointments,
   logout,
 } = require("../controllers/userController");
 
@@ -17,10 +16,6 @@ router.route("/checkLoginDetails").post(checkLoginDetails);
 router
   .route("/checkForUser_Token")
   .get(isAuthenticatedUser, checkForUser_Token);
-
-router
-  .route("/get-user-appointments")
-  .get(isAuthenticatedUser, getUserAppointments);
 
 router.route("/logout").get(logout);
 

@@ -5,15 +5,15 @@ const router = express.Router();
 
 const {
   registerAppointment,
+  getBarberAppointments,
   updateBarberAppointment,
+  getUserAppointments,
 } = require("../controllers/appointmentController");
 
 const {
   paymentVerification,
   updateUserAppointment,
 } = require("../controllers/paymentController");
-
-const { getBarberAppointments } = require("../controllers/barberController");
 
 router
   .route("/register-appointment")
@@ -26,6 +26,10 @@ router
 router
   .route("/get-barber-appointments/:id")
   .get(isAuthenticatedUser, getBarberAppointments);
+
+router
+  .route("/get-user-appointments")
+  .get(isAuthenticatedUser, getUserAppointments);
 
 router
   .route("/update-barber-appointment/:id")

@@ -26,13 +26,6 @@ const getSpecificSalonDetails_SalonName = catchAsyncErrors(async (req, res) => {
   res.status(200).json({ currentSalon: salon });
 });
 
-const getBarberAppointments = catchAsyncErrors(async (req, res) => {
-  const { id } = req.params;
-
-  const appointments = await Appointments.find({ barberId: id });
-  res.status(200).json({ orders: appointments });
-});
-
 const registerSalonSchedules = catchAsyncErrors(async (req, res) => {
   const time = req.body.times.map((time) => {
     return { time: time, isBooked: false };
@@ -66,12 +59,12 @@ const getAllSalonSchedules = catchAsyncErrors(async (req, res) => {
 
   res.status(202).json({ schedules: schedules });
 });
+
 module.exports = {
   registerSalon,
   getAllSalonDetails,
   getSpecificSalonDetails_ID,
   getSpecificSalonDetails_SalonName,
-  getBarberAppointments,
   registerSalonSchedules,
   getAllSalonSchedules,
 };
