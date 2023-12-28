@@ -89,7 +89,6 @@ export const getAllSalonSchedules = createAsyncThunk(
   "salons/getAllSalonSchedules",
   async (barberID) => {
     try {
-      console.log(barberID);
       const response = await axios.get(
         `http://localhost:4000/get-all-salon-schedules/${barberID}`,
         {
@@ -98,7 +97,6 @@ export const getAllSalonSchedules = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }

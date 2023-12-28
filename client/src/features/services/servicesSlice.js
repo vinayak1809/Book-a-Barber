@@ -30,7 +30,6 @@ export const registerService = createAsyncThunk(
         `http://localhost:4000/register-specific-salon-service`,
         serviceDetails
       );
-      console.log(service, "service");
       return service.data;
     } catch (error) {
       throw error; //
@@ -80,7 +79,6 @@ export const registerSalonSchedules = createAsyncThunk(
         schedule,
         { withCredentials: true }
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw error;

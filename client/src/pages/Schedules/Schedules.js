@@ -3,7 +3,10 @@ import "./Schedules.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-import { getBarborAppointments } from "../../features/user/userSlice";
+import {
+  getBarborAppointments,
+  getUserAppointments,
+} from "../../features/user/userSlice";
 import { updateBarberAppointment } from "../../features/Appointment/appointmentSlice";
 import payment from "../../utils/payment";
 
@@ -23,12 +26,15 @@ const Schedules = () => {
   };
 
   useEffect(() => {
-    dispatch(getBarborAppointments(currentSalon[0]._id));
-  }, []);
+    user.role === "barber"
+      ? dispatch(getBarborAppointments(currentSalon[0]._id))
+      : dispatch(getUserAppointments());
+  }, [dispatch]);
 
   const update = (id) => {
     dispatch(updateBarberAppointment({ id: id, status: orderStatus[id] }));
   };
+
   return (
     //amount column
     <div>
@@ -49,7 +55,9 @@ const Schedules = () => {
                 <td>{order._id}</td>
                 <td>{order.services[0].serviceName}</td>
                 <td>9145789245</td>
-                <td>{order.time}</td>
+                <td>
+                  {order.date} | {order.time}
+                </td>
                 {order.status === "accepted" ? (
                   <button onClick={() => payment(order._id, order.totalAmount)}>
                     Payment

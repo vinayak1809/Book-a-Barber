@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { paymentVerification } from "../features/user/userSlice";
-
 const payment = async (id, totalAmount) => {
   const {
     data: { RZP_key },
@@ -13,7 +11,6 @@ const payment = async (id, totalAmount) => {
     totalAmount: totalAmount,
   });
 
-  console.log(order, RZP_key, "RZP_keyRZP_key");
   const options = {
     key: RZP_key,
     amount: order.amount,

@@ -37,7 +37,6 @@ const AddService = () => {
         price: price,
       },
     };
-    console.log(serviceDetails, "serviceDetails");
     dispatch(registerService(serviceDetails));
   };
 

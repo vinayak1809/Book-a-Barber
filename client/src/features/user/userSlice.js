@@ -116,7 +116,6 @@ export const paymentVerification = createAsyncThunk(
   "user/paymentVerification",
   async (response2) => {
     try {
-      console.log("hello peter", response2);
       const response = await axios.post(
         "http://localhost:4000/payment-verification",
         response2,
@@ -124,7 +123,7 @@ export const paymentVerification = createAsyncThunk(
           withCredentials: true,
         }
       );
-      console.log(response.data, "response.data");
+
       return response.data;
     } catch (error) {
       return { error: "something went wrong" };
