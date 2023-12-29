@@ -43,6 +43,7 @@ const Profile = () => {
     };
     dispatch(registerSalonSchedules(schedule));
   };
+
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -62,6 +63,8 @@ const Profile = () => {
           onAccept={(newValue) => {
             addTime(newValue);
           }}
+          ampm={false}
+          minutesStep={15}
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
