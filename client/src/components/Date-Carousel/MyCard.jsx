@@ -41,7 +41,7 @@ const MyCard = (props) => {
   };
 
   const getTimeStyle = (t,d) => {
-    if (time === t.time && props.currDate == d) {
+    if (time === t.time && props.currDate === d) {
       return {background: '#FFB700', color: 'black',border:"1px solid #d89c05" };
     }
     return {};

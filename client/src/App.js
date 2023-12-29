@@ -11,7 +11,6 @@ import BarberHome from "./pages/Barber-Home/BarberHome";
 import RegisterSalon from "./pages/Register-Salon/RegisterSalon";
 import AddService from "./pages/Add-Service/AddService";
 import DatePayment from "./pages/Date-Payment/DatePayment";
-import Orders from "./pages/Orders/Orders";
 import Schedules from "./pages/Schedules/Schedules";
 import Profile from "./pages/Profile/Profile";
 
