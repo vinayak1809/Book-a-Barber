@@ -1,6 +1,6 @@
 import "./Orders.css";
 import Header from "../../components/Header/Header";
-import { getUserAppointments } from "../../features/user/userSlice";
+import { getUserAppointments } from "../../features/Appointment/appointmentSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const Orders = () => {
   const dispatch = useDispatch();
 
-  const { orders } = useSelector((state) => state.user);
+  const { appointments } = useSelector((state) => state.appointment);
 
   useEffect(() => {
     dispatch(getUserAppointments());
@@ -20,7 +20,7 @@ const Orders = () => {
       <div className="orders-page">
         <div className="upcoming-orders">
           <h2>Upcoming</h2>
-          {orders.map((link, index) => (
+          {appointments.map((link, index) => (
             <div className="up-order">
               <h4>{link.date}</h4>
               <p>{link.serviceName}</p>

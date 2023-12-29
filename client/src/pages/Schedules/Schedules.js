@@ -6,14 +6,15 @@ import { useEffect, useState } from "react";
 import {
   getBarborAppointments,
   getUserAppointments,
-} from "../../features/user/userSlice";
+} from "../../features/Appointment/appointmentSlice";
 import { updateBarberAppointment } from "../../features/Appointment/appointmentSlice";
 import payment from "../../utils/payment";
 
 const Schedules = () => {
   const dispatch = useDispatch();
 
-  const { orders, user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+  const { appointments } = useSelector((state) => state.appointment);
   const { currentSalon } = useSelector((state) => state.salons);
 
   const [orderStatus, setOrderStatus] = useState({});
@@ -50,19 +51,23 @@ const Schedules = () => {
               <td>Status</td>
             </tr>
 
-            {orders.map((order) => (
+            {appointments.map((appointment) => (
               <tr>
-                <td>{order._id}</td>
-                <td>{order.services[0].serviceName}</td>
+                <td>{appointment._id}</td>
+                <td>{appointment.services[0].serviceName}</td>
                 <td>9145789245</td>
                 <td>
-                  {order.date} | {order.time}
+                  {appointment.date} | {appointment.time}
                 </td>
-                {order.status === "accepted" ? (
-                  <button onClick={() => payment(order._id, order.totalAmount)}>
+                {appointment.status === "accepted" ? (
+                  <button
+                    onClick={() =>
+                      payment(appointment._id, appointment.totalAmount)
+                    }
+                  >
                     Payment
                   </button>
-                ) : order.status === "payment-done" ? (
+                ) : appointment.status === "payment-done" ? (
                   <p>Payment Done</p>
                 ) : (
                   <p>Requested</p>
@@ -80,19 +85,19 @@ const Schedules = () => {
               <td>Status</td>
             </tr>
 
-            {orders.map((order) => (
+            {appointments.map((appointment) => (
               <tr>
-                <td>{order._id}</td>
-                <td>{order.services[0].serviceName}</td>
+                <td>{appointment._id}</td>
+                <td>{appointment.services[0].serviceName}</td>
                 <td>9145789245</td>
-                <td>{order.time}</td>
+                <td>{appointment.time}</td>
                 <td>
-                  {order.status !== "payment-done" ? (
+                  {appointment.status !== "payment-done" ? (
                     <select
                       onChange={(e) =>
-                        handleStatusChange(order._id, e.target.value)
+                        handleStatusChange(appointment._id, e.target.value)
                       }
-                      value={orderStatus[order._id] || order.status}
+                      value={orderStatus[appointment._id] || appointment.status}
                     >
                       <option value="requested">Requested</option>
                       <option value="accepted">Accepted</option>
@@ -104,7 +109,7 @@ const Schedules = () => {
                   )}
                 </td>
 
-                <button onClick={() => update(order._id)}>Update</button>
+                <button onClick={() => update(appointment._id)}>Update</button>
               </tr>
             ))}
           </table>
