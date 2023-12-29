@@ -47,7 +47,6 @@ const logout = catchAsyncErrors(async (req, res, next) => {
     token: "",
     success: false,
     msg: "Logged out Successfully.",
-    orders: [],
   });
 });
 

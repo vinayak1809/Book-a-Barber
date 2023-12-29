@@ -57,7 +57,7 @@ const getAllSalonSchedules = catchAsyncErrors(async (req, res) => {
 
   const schedules = await Schedules.find({ barberId: barberId });
 
-  res.status(202).json({ schedules: schedules });
+  res.status(200).json({ schedules: schedules });
 });
 
 module.exports = {
