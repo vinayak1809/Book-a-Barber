@@ -2,17 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  appointment: [
-    {
-      _id: "",
-      userID: "",
-      salonID: "",
-      service: "",
-      date: "",
-      time: "",
-      status: "",
-    },
-  ],
+  appointments: [],
 };
 
 export const registerAppointment = createAsyncThunk(
@@ -24,9 +14,45 @@ export const registerAppointment = createAsyncThunk(
         appointmentDetails
       );
 
-      return response;
+      return { ...response, error: "" };
     } catch (error) {
-      throw error; //
+      return { error: "Unable to Register Appointment" };
+    }
+  }
+);
+
+//Normal User
+export const getUserAppointments = createAsyncThunk(
+  "user/getUserAppointments",
+  async () => {
+    console.log("we are here");
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/get-user-appointments",
+        {
+          withCredentials: true,
+        }
+      );
+      return { ...response.data, error: "" };
+    } catch (error) {
+      return { error: "something went wrong: " + error.name };
+      //console.log(error, "error in fetching user order");
+    }
+  }
+);
+
+//User who is a Barber
+export const getBarborAppointments = createAsyncThunk(
+  "user/getBarberAppointments",
+  async (id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/get-barber-appointments/${id}`,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      return { error: "something went wrong" };
     }
   }
 );
@@ -40,7 +66,7 @@ export const updateBarberAppointment = createAsyncThunk(
         { status: info.status },
         { withCredentials: true }
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
       return { error: "something went wrong" };
     }
@@ -52,6 +78,15 @@ export const appointmentSlice = createSlice({
   extraReducers: {
     [registerAppointment.fulfilled]: (state, action) => {
       return { ...action.payload };
+    },
+    [getBarborAppointments.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    [updateBarberAppointment.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    [getUserAppointments.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
     },
   },
 });

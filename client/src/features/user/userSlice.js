@@ -7,7 +7,6 @@ const initialState = {
     role: "",
   },
   token: "",
-  orders: [],
   error: "",
 };
 
@@ -19,9 +18,9 @@ export const createUser = createAsyncThunk(
         "http://localhost:4000/registerUser",
         userDetails
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Unable to Create New User" };
     }
   }
 );
@@ -37,9 +36,9 @@ export const checkLoginDetails = createAsyncThunk(
       // Store the token in a cookie
       document.cookie = `token=${response.data.token}; path=/;`;
 
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      return error.response.data;
+      return { error: error.response.data.error };
     }
   }
 );
@@ -54,9 +53,9 @@ export const checkForUser_Token = createAsyncThunk(
           withCredentials: true,
         }
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      return error.response.data;
+      return { error: error.response.data.error };
       //console.log(error, "error in check for use token");
     }
   }
@@ -70,47 +69,12 @@ export const logout = createAsyncThunk("user/logout", async () => {
 
     localStorage.removeItem("persist:root");
 
-    return response.data;
+    return { ...response.data, error: "" };
   } catch (error) {
     return { error: "something went wrong cannot logout" };
     //console.log(error, "error in logout");
   }
 });
-
-//Normal User
-export const getUserAppointments = createAsyncThunk(
-  "user/getUserAppointments",
-  async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:4000/get-user-appointments",
-        {
-          withCredentials: true,
-        }
-      );
-      return response.data;
-    } catch (error) {
-      return { error: "something went wrong" };
-      //console.log(error, "error in fetching user order");
-    }
-  }
-);
-
-//User who is a Barber
-export const getBarborAppointments = createAsyncThunk(
-  "user/getBarberAppointments",
-  async (id) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:4000/get-barber-appointments/${id}`,
-        { withCredentials: true }
-      );
-      return response.data;
-    } catch (error) {
-      return { error: "something went wrong" };
-    }
-  }
-);
 
 export const paymentVerification = createAsyncThunk(
   "user/paymentVerification",
@@ -124,9 +88,9 @@ export const paymentVerification = createAsyncThunk(
         }
       );
 
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      return { error: "something went wrong" };
+      return { error: "Payment failed" };
     }
   }
 );
@@ -146,12 +110,6 @@ export const userSlice = createSlice({
     },
     [checkForUser_Token.fulfilled]: (state, action) => {
       return { ...action.payload };
-    },
-    [getUserAppointments.fulfilled]: (state, action) => {
-      return { ...state, ...action.payload };
-    },
-    [getBarborAppointments.fulfilled]: (state, action) => {
-      return { ...state, ...action.payload };
     },
     [logout.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };

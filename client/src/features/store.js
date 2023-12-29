@@ -8,6 +8,7 @@ import { userReducer } from "./user/userSlice";
 import { userOptionReducer } from "./user/optionSlice";
 import { salonsReducer } from "./Salons/salonsSlice";
 import { salonServicesReducer } from "./services/servicesSlice";
+import { appointmentReducer } from "./Appointment/appointmentSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   userOption: userOptionReducer,
   salons: salonsReducer,
   services: salonServicesReducer,
+  appointment: appointmentReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
