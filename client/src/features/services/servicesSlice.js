@@ -15,9 +15,9 @@ export const getSpecificSalonServices = createAsyncThunk(
         { withCredentials: true }
       );
 
-      return services.data;
+      return { ...services.data, error: "" };
     } catch (error) {
-      throw error; //
+      return { error: "Something went wrong" };
     }
   }
 );
@@ -30,9 +30,9 @@ export const registerService = createAsyncThunk(
         `http://localhost:4000/register-specific-salon-service`,
         serviceDetails
       );
-      return service.data;
+      return { ...service.data, error: "" };
     } catch (error) {
-      throw error; //
+      return { error: "Unable to Register Service" };
     }
   }
 );
@@ -51,8 +51,11 @@ export const setChoosedService = createAsyncThunk(
       }
 
       newService.types = filter;
-      return { choosedService: newService };
-    } catch {}
+
+      return { choosedService: newService, error: "" };
+    } catch {
+      return { error: "Something went wrong" };
+    }
   }
 );
 
@@ -63,9 +66,9 @@ export const getServicesForChossedCategory = createAsyncThunk(
       const response = await axios.get(
         `http://localhost:4000/get-services-for-choosed-category/${category}`
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Something went wrong" };
     }
   }
 );
@@ -79,9 +82,9 @@ export const registerSalonSchedules = createAsyncThunk(
         schedule,
         { withCredentials: true }
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Unable to register salon schedules" };
     }
   }
 );

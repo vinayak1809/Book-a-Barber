@@ -15,11 +15,15 @@ const initialState = {
 export const registerSalon = createAsyncThunk(
   "user/registerSalon",
   async (salonDetails) => {
-    const salon = await axios.post(
-      "http://localhost:4000/register-salon",
-      salonDetails
-    );
-    return salon.data;
+    try {
+      const salon = await axios.post(
+        "http://localhost:4000/register-salon",
+        salonDetails
+      );
+      return { ...salon.data, error: "" };
+    } catch (error) {
+      return { error: "Unable to Register New Salon" };
+    }
   }
 );
 
@@ -30,9 +34,9 @@ export const getAllSalonsDetails = createAsyncThunk(
       const response = await axios.get(
         "http://localhost:4000/get-all-salons-details"
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error; //
+      return { error: "Something went wrong" };
     }
   }
 );
@@ -47,9 +51,9 @@ export const getSpecificSalonDetails_ID = createAsyncThunk(
         { withCredentials: true }
       );
 
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Something went wrong" };
     }
   }
 );
@@ -64,9 +68,9 @@ export const getSpecificSalonDetails_SalonName = createAsyncThunk(
         { withCredentials: true }
       );
 
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Something went wrong" };
     }
   }
 );
@@ -78,9 +82,9 @@ export const getSalonsForChosedService = createAsyncThunk(
       const response = await axios.get(
         `http://localhost:4000/get-salons-for-choosed-service/${category}`
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Something went wrong" };
     }
   }
 );
@@ -95,9 +99,9 @@ export const getAllSalonSchedules = createAsyncThunk(
           withCredentials: true,
         }
       );
-      return response.data;
+      return { ...response.data, error: "" };
     } catch (error) {
-      throw error;
+      return { error: "Something went wrong" };
     }
   }
 );
