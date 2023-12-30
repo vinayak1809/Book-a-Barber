@@ -1,0 +1,27 @@
+
+#cient
+
+# dependencies
+client/node_modules
+
+# testing
+
+# production
+client/build
+
+# misc
+client/.DS_Store
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+
+
+#server
+
+# dependencies
+server/node_modules
+server/config.env
