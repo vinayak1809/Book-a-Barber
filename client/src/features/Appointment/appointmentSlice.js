@@ -25,7 +25,6 @@ export const registerAppointment = createAsyncThunk(
 export const getUserAppointments = createAsyncThunk(
   "user/getUserAppointments",
   async () => {
-    console.log("we are here");
     try {
       const response = await axios.get(
         "http://localhost:4000/get-user-appointments",
