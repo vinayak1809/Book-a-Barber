@@ -1,7 +1,6 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErros");
 const Barber = require("../models/Barbers");
 const Schedules = require("../models/Schedules");
-const Appointments = require("../models/Appointments");
 
 const registerSalon = async (req, res) => {
   const salon = await new Barber({ ...req.body });
@@ -10,7 +9,10 @@ const registerSalon = async (req, res) => {
 };
 
 const getAllSalonDetails = catchAsyncErrors(async (req, res) => {
-  const salons = await Barber.find().populate("userID");
+  const salons = await Barber.find().populate({
+    path: "userID",
+    select: "fullname email profilePicture role contactInformation",
+  });
   res.status(200).json({ salons: salons });
 });
 
