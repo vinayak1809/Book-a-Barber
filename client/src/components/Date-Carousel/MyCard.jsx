@@ -6,7 +6,6 @@ import "./MyCard.css"
 
 
 const MyCard = (props) => {
-
   const [time,setTime]= useState("");
   const [date,setDate] = useState("");
   const { user } = useSelector((state) => state.user);
@@ -52,7 +51,7 @@ const MyCard = (props) => {
     <form>
       <div className='first-card'>
           <div className='date'>
-          <h4>{props.date} </h4>
+          <h4>{new Date(props.date).toLocaleDateString()} </h4>
           </div>
           <div className='time'>
             
@@ -64,7 +63,7 @@ const MyCard = (props) => {
                 className={`sub-time mycard-${props.cardNo}`}
                 style={getTimeStyle(props.time[index],props.date)} 
                 onClick={() => handleTimeClick(props.time[index],props.date)}>
-                  {props.time[index].time}
+                  {new Date(props.time[index].time).toLocaleTimeString('en-US', {hour: '2-digit',minute: '2-digit'})}
                 </li>
               ))}
             </ul>

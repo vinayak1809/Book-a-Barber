@@ -11,7 +11,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { registerSalonSchedules } from "../../features/services/servicesSlice";
 
 const Profile = () => {
-  const [date, setDate] = useState({ $d: "something" });
+  const [date, setDate] = useState();
   const [times, setTimes] = useState([]);
   const dispatch = useDispatch();
 
@@ -20,10 +20,25 @@ const Profile = () => {
   const tomorrow = dayjs().add(7, "day");
 
   const addTime = (currentTime) => {
-    const formattedTime = dayjs(currentTime).format("HH:mm A");
-    if (!times.includes(formattedTime)) {
-      setTimes([...times, formattedTime]);
+    var check = true;
+
+    if (times.length < 1) {
+      setTimes([currentTime]);
+    } else {
+      times.map((time) => {
+        if (time.toString() === currentTime.toString()) {
+          return (check = false);
+        }
+      });
     }
+
+    if (check) {
+      setTimes([...times, currentTime]);
+    }
+
+    // if (!times.includes(currentTime)) {
+    //   setTimes([...times, currentTime]);
+    // }
   };
 
   const remove = (removetime) => {
@@ -34,14 +49,25 @@ const Profile = () => {
   };
 
   const update = () => {
-    const formattedDate = dayjs(date).format("DD-MM-YY");
-
     const schedule = {
-      date: formattedDate,
+      date: date.$d,
       times: times,
       barberId: currentSalon[0]._id,
     };
     dispatch(registerSalonSchedules(schedule));
+  };
+
+  const timeFormat = (time) => {
+    function addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+
+    let h = addZero(time.getHours());
+    let m = addZero(time.getMinutes());
+    return h + ":" + m;
   };
 
   return (
@@ -61,7 +87,14 @@ const Profile = () => {
         <TimePicker
           label="Select Time:"
           onAccept={(newValue) => {
-            addTime(newValue);
+            const customDate = new Date(newValue.$d);
+            customDate.setFullYear(
+              dayjs(date).year(),
+              dayjs(date).month(),
+              dayjs(date).date()
+            );
+
+            addTime(customDate);
           }}
           ampm={false}
           minutesStep={15}
@@ -70,14 +103,16 @@ const Profile = () => {
       </LocalizationProvider>
 
       <div>
-        <ul>
-          {times.map((time, index) => (
-            <li key={index}>
-              <p>{time}</p>
-              <button onClick={() => remove(time)}>X</button>
-            </li>
-          ))}
-        </ul>
+        {
+          <ul>
+            {times.map((time, index) => (
+              <li key={index}>
+                <p>{timeFormat(time)}</p>
+                <button onClick={() => remove(time)}>X</button>
+              </li>
+            ))}
+          </ul>
+        }
       </div>
 
       <button

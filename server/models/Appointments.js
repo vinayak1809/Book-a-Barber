@@ -26,16 +26,23 @@ const AppointmentScehma = new Schema({
     },
   ],
   date: {
-    type: String,
+    type: Date,
     required: true,
   },
   time: {
-    type: String,
+    type: Date,
     required: true,
   },
   status: {
     type: String,
-    enum: ["requested", "accepted", "rejected", "completed", "payment-done"],
+    enum: [
+      "requested",
+      "accepted",
+      "rejected",
+      "completed",
+      "payment-done",
+      "no-reponse",
+    ],
     default: "requested",
   },
   totalAmount: {
