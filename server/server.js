@@ -7,6 +7,9 @@ const cookieParser = require("cookie-parser");
 
 const { connection } = require("./config/database");
 const errorMiddleware = require("./middleware/errorMiddleware");
+const {
+  autoUpdateAppointment,
+} = require("./controllers/appointmentController");
 
 const app = express();
 
@@ -33,4 +36,6 @@ app.get("/api/getKey", (req, res) =>
     .json({ RZP_key: process.env.RZP_KEY_ID, CLOUD_KEY: process.env.CLOUD_KEY })
 );
 
-app.listen(4000);
+app.listen(4000, () => {
+  autoUpdateAppointment();
+});

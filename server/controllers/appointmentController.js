@@ -42,9 +42,23 @@ const updateBarberAppointment = catchAsyncErrors(async (req, res) => {
   res.status(200).json({ success: true, message: "Updated" });
 });
 
+const autoUpdateAppointment = async () => {
+  const currentDate = new Date();
+
+  //set no response if the status is "requested" or "accepted"
+  await Appointment.updateMany(
+    {
+      date: { $lt: currentDate },
+      status: { $in: ["requested", "accepted"] },
+    },
+    { $set: { status: "no-reponse" } }
+  );
+};
+
 module.exports = {
   registerAppointment,
   getBarberAppointments,
   getUserAppointments,
   updateBarberAppointment,
+  autoUpdateAppointment,
 };
