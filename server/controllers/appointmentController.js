@@ -51,7 +51,7 @@ const autoUpdateAppointment = async () => {
       date: { $lt: currentDate },
       status: { $in: ["requested", "accepted"] },
     },
-    { $set: { status: "no-reponse" } }
+    { $set: { status: "no-response" } }
   );
 };
 

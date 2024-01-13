@@ -20,6 +20,6 @@ router
 router.route("/logout").get(logout);
 
 //payment routes
-router.route("/checkout/:id").post(checkout);
+router.route("/checkout").post(checkout);
 
 module.exports = router;

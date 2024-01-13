@@ -69,6 +69,8 @@ const Schedules = () => {
                   </button>
                 ) : appointment.status === "payment-done" ? (
                   <p>Payment Done</p>
+                ) : appointment.status === "no-response" ? (
+                  <p>No Response</p>
                 ) : (
                   <p>Requested</p>
                 )}
@@ -92,7 +94,9 @@ const Schedules = () => {
                 <td>9145789245</td>
                 <td>{appointment.time}</td>
                 <td>
-                  {appointment.status !== "payment-done" ? (
+                  {appointment.status === "no-response" ? (
+                    <p>No Response</p>
+                  ) : appointment.status !== "payment-done" ? (
                     <select
                       onChange={(e) =>
                         handleStatusChange(appointment._id, e.target.value)
