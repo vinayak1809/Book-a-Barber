@@ -88,6 +88,23 @@ export const registerSalonSchedules = createAsyncThunk(
     }
   }
 );
+
+export const updateSalonSchedules = createAsyncThunk(
+  "salons/updateSalonSchedules",
+  async (schedule) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/update-salon-schedules",
+        schedule,
+        { withCredentials: true }
+      );
+      return { ...response.data, error: "" };
+    } catch (error) {
+      return { error: "Unable to update salon schedules" };
+    }
+  }
+);
+
 export const salonServiceSlice = createSlice({
   name: "salonService",
   initialState,
