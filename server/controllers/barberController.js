@@ -29,13 +29,10 @@ const getSpecificSalonDetails_SalonName = catchAsyncErrors(async (req, res) => {
 });
 
 const registerSalonSchedules = catchAsyncErrors(async (req, res) => {
-  const time = req.body.times.map((time) => {
-    return { time: time, isBooked: false };
-  });
-
   const checkSalonExist = await Schedules.findOne({
     barberId: req.body.barberId,
   });
+
   let schedule;
 
   if (checkSalonExist) {
@@ -43,13 +40,30 @@ const registerSalonSchedules = catchAsyncErrors(async (req, res) => {
       { barberId: req.body.barberId },
       {
         $push: {
-          dayTime: { date: req.body.date, time: time },
+          dayTime: { date: req.body.date, time: req.body.times },
         },
       }
     );
   } else {
     schedule = await Schedules.create({ ...req.body });
   }
+
+  res.status(201).json({ schedules: schedule });
+});
+
+const updateSalonSchedules = catchAsyncErrors(async (req, res) => {
+  const perform = req.body.times.filter((time) => {
+    return !time._id;
+  });
+
+  let schedule;
+
+  schedule = await Schedules.findOneAndUpdate(
+    { barberId: req.body.barberId, "dayTime.date": req.body.date },
+    {
+      $push: { "dayTime.$.time": perform },
+    }
+  );
 
   res.status(201).json({ schedules: schedule });
 });
@@ -69,4 +83,5 @@ module.exports = {
   getSpecificSalonDetails_SalonName,
   registerSalonSchedules,
   getAllSalonSchedules,
+  updateSalonSchedules,
 };

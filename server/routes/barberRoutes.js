@@ -9,6 +9,7 @@ const {
   getSpecificSalonDetails_SalonName,
   registerSalonSchedules,
   getAllSalonSchedules,
+  updateSalonSchedules,
 } = require("../controllers/barberController");
 
 //user-side routes
@@ -25,6 +26,7 @@ router
   .get(isAuthenticatedUser, getSpecificSalonDetails_ID);
 
 router.route("/register-salon-schedules").post(registerSalonSchedules);
+router.route("/update-salon-schedules").post(updateSalonSchedules);
 
 router
   .route("/get-all-salon-schedules/:barberId")

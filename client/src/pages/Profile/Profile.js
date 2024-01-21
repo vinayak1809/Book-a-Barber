@@ -51,14 +51,14 @@ const Profile = () => {
       setTimes([{ time: currentTime, isBooked: false }]);
     } else {
       times.map((time) => {
-        if (time.toString() === currentTime.toString()) {
+        if (time.time === currentTime) {
           return (check = false);
         }
       });
     }
 
     if (check) {
-      setTimes([...times, { time: currentTime, isBooked: false }]);
+      setTimes([...times, { time: currentTime.toString(), isBooked: false }]);
     }
 
     //alternate code on above 3-4 line
@@ -76,7 +76,7 @@ const Profile = () => {
 
   const update = () => {
     const schedule = {
-      date: date.$d,
+      date: date.$d.toString(),
       times: times,
       barberId: currentSalon[0]._id,
     };
@@ -87,16 +87,16 @@ const Profile = () => {
   };
 
   const timeFormat = (time) => {
-    //    function addZero(i) {
-    //      if (i < 10) {
-    //        i = "0" + i;
-    //      }
-    //      return i;
-    //    }
-    //
-    //    let h = addZero(time.getHours());
-    //    let m = addZero(time.getMinutes());
-    return time.time.toString();
+    function addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+
+    let h = addZero(new Date(time.time).getHours());
+    let m = addZero(new Date(time.time).getMinutes());
+    return h + " : " + m;
   };
 
   return (
