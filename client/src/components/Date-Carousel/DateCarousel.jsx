@@ -35,9 +35,9 @@ const DateCarousel = (props) => {
     const box = document.querySelector('.date-container');
     box.scrollLeft += 270;
     
-    if(count < dateTime.length){
-      setCount(count+1)
-      setCurrentDate(dateTime[count+1].date)
+    if(count < (dateTime.length - 1)){
+      setCount(count + 1)
+      setCurrentDate(dateTime[count + 1].date)
     }
   }
 

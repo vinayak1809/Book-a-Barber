@@ -63,7 +63,7 @@ const MyCard = (props) => {
                 className={`sub-time mycard-${props.cardNo}`}
                 style={getTimeStyle(props.time[index],props.date)} 
                 onClick={() => handleTimeClick(props.time[index],props.date)}>
-                  {new Date(props.time[index].time).toLocaleTimeString('en-US', {hour: '2-digit',minute: '2-digit'})}
+                  {new Date(props.time[index].time).toLocaleTimeString('en-IN', {hour: '2-digit',minute: '2-digit'})}
                 </li>
               ))}
             </ul>
