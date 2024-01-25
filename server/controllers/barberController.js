@@ -71,7 +71,26 @@ const updateSalonSchedules = catchAsyncErrors(async (req, res) => {
 const getAllSalonSchedules = catchAsyncErrors(async (req, res) => {
   const { barberId } = req.params;
 
-  const schedules = await Schedules.find({ barberId: barberId });
+  var schedules = await Schedules.find({
+    barberId: barberId,
+  });
+
+  //slicing out last 7 days to show up on calender
+  if (schedules[0].dayTime.length > 7) {
+    schedules[0].dayTime = schedules[0].dayTime.slice(-7);
+  }
+
+  //only next 7 days from today will show up on calender
+  schedules[0].dayTime = schedules[0].dayTime.filter((dayTime) => {
+    if (new Date(dayTime.date) >= new Date()) {
+      return dayTime;
+    }
+  });
+
+  //sort the date in ascending prder
+  schedules[0].dayTime = schedules[0].dayTime.sort(function (a, b) {
+    return new Date(a.date) - new Date(b.date);
+  });
 
   res.status(200).json({ schedules: schedules });
 });
