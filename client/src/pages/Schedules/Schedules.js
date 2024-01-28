@@ -57,7 +57,8 @@ const Schedules = () => {
                 <td>{appointment.services[0].serviceName}</td>
                 <td>9145789245</td>
                 <td>
-                  {appointment.date} | {appointment.time}
+                  {appointment.date.slice(0, 10)} |{" "}
+                  {appointment.time.slice(11, 16)}
                 </td>
                 {appointment.status === "accepted" ? (
                   <button
