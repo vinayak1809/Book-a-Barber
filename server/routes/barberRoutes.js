@@ -25,8 +25,12 @@ router
   .route("/get-specific-salon-details-ID/:userID")
   .get(isAuthenticatedUser, getSpecificSalonDetails_ID);
 
-router.route("/register-salon-schedules").post(registerSalonSchedules);
-router.route("/update-salon-schedules").post(updateSalonSchedules);
+router
+  .route("/register-salon-schedules")
+  .post(isAuthenticatedUser, registerSalonSchedules);
+router
+  .route("/update-salon-schedules")
+  .post(isAuthenticatedUser, updateSalonSchedules);
 
 router
   .route("/get-all-salon-schedules/:barberId")
