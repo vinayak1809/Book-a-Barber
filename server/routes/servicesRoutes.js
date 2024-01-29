@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isAuthenticatedUser } = require("../middleware/auth");
 
 const {
   registerSpecificSalonService,
@@ -9,7 +10,7 @@ const {
 
 router
   .route("/register-specific-salon-service")
-  .post(registerSpecificSalonService);
+  .post(isAuthenticatedUser, registerSpecificSalonService);
 
 router
   .route("/get-specific-salon-services/:salonID")

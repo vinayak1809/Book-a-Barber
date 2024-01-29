@@ -13,7 +13,7 @@ const {
 } = require("../controllers/barberController");
 
 //user-side routes
-router.route("/register-salon").post(registerSalon);
+router.route("/register-salon").post(isAuthenticatedUser, registerSalon);
 router.route("/get-all-salons-details").get(getAllSalonDetails);
 
 router
