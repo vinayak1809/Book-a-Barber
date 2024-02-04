@@ -31,16 +31,18 @@ const Profile = () => {
 
   //trying to retrive the particular date record when we clicked on particular date
   useEffect(() => {
-    const n = schedules[0].dayTime.filter((dateTime) => {
-      return new Date(dateTime.date).toString() == date.$d.toString();
-    });
+    if (schedules.length > 0) {
+      const n = schedules[0].dayTime.filter((dateTime) => {
+        return new Date(dateTime.date).toString() == date.$d.toString();
+      });
 
-    if (Object.keys(n).length > 0) {
-      setCheckExistingDate(true);
-      setTimes(n[0].time);
-    } else {
-      setCheckExistingDate(false);
-      setTimes([]);
+      if (Object.keys(n).length > 0) {
+        setCheckExistingDate(true);
+        setTimes(n[0].time);
+      } else {
+        setCheckExistingDate(false);
+        setTimes([]);
+      }
     }
   }, [date]);
 
@@ -51,7 +53,7 @@ const Profile = () => {
       setTimes([{ time: currentTime, isBooked: false }]);
     } else {
       times.map((time) => {
-        if (time.time === currentTime) {
+        if (time.time === currentTime.toString()) {
           return (check = false);
         }
       });

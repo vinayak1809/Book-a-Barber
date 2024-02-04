@@ -30,7 +30,10 @@ const getSpecificSalonDetails_SalonName = catchAsyncErrors(async (req, res) => {
 
 const registerSalonSchedules = catchAsyncErrors(async (req, res) => {
   const checkSalonExist = await Schedules.findOne({
-    barberId: req.body.barberId,
+    $or: [
+      { barberId: req.body.barberId },
+      { barberId: req.body.barberId, "dayTime.date": req.body.date },
+    ],
   });
 
   let schedule;
@@ -45,23 +48,23 @@ const registerSalonSchedules = catchAsyncErrors(async (req, res) => {
       }
     );
   } else {
-    schedule = await Schedules.create({ ...req.body });
+    schedule = await Schedules.create({
+      dayTime: { date: req.body.date, time: req.body.times },
+      barberId: req.body.barberId,
+      userId: req.user._id,
+    });
   }
 
   res.status(201).json({ schedules: schedule });
 });
 
 const updateSalonSchedules = catchAsyncErrors(async (req, res) => {
-  const perform = req.body.times.filter((time) => {
-    return !time._id;
-  });
-
   let schedule;
 
   schedule = await Schedules.findOneAndUpdate(
     { barberId: req.body.barberId, "dayTime.date": req.body.date },
     {
-      $push: { "dayTime.$.time": perform },
+      $set: { "dayTime.$.time": req.body.times },
     }
   );
 
@@ -76,22 +79,23 @@ const getAllSalonSchedules = catchAsyncErrors(async (req, res) => {
   });
 
   //slicing out last 7 days to show up on calender
-  if (schedules[0].dayTime.length > 7) {
-    schedules[0].dayTime = schedules[0].dayTime.slice(-7);
-  }
-
-  //only next 7 days from today will show up on calender
-  schedules[0].dayTime = schedules[0].dayTime.filter((dayTime) => {
-    if (new Date(dayTime.date) >= new Date()) {
-      return dayTime;
+  if (schedules.length > 0) {
+    if (schedules[0].dayTime.length > 7) {
+      schedules[0].dayTime = schedules[0].dayTime.slice(-7);
     }
-  });
 
-  //sort the date in ascending prder
-  schedules[0].dayTime = schedules[0].dayTime.sort(function (a, b) {
-    return new Date(a.date) - new Date(b.date);
-  });
+    //only next 7 days from today will show up on calender
+    schedules[0].dayTime = schedules[0].dayTime.filter((dayTime) => {
+      if (new Date(dayTime.date) >= new Date()) {
+        return dayTime;
+      }
+    });
 
+    //sort the date in ascending prder
+    schedules[0].dayTime = schedules[0].dayTime.sort(function (a, b) {
+      return new Date(a.date) - new Date(b.date);
+    });
+  }
   res.status(200).json({ schedules: schedules });
 });
 
