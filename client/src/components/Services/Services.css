@@ -4,6 +4,8 @@
 
 .top3 h3{
     font-size: 2.1em;
+    margin: 0 0 10px;
+    padding: 0;
 }
 
 .top3 ul{
@@ -12,15 +14,23 @@
     flex-direction: column;
     width: 60%;
     margin: 0px;
+    padding: 0;
 }
 
 .top3 .tag{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
+.tag-list{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 30%;
+}
 
 .top3 .tagname{
     display: flex;
@@ -30,36 +40,6 @@
 }
 
 /*
-
-.top3 ul img{
-    width: 300px;
-    height: 300px;
-}
-
-.service-info{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-    align-items: center;
-}
-
-.service-info h1{
-    font-size: 1.5em;
-}
-
-.service-book-btn{
-    display: flex;
-    justify-content: flex-end;
-}
-
-.service-book-btn button{
-    background-color: black;
-    color: white;
-    padding:10px 30px ;
-    border: none;
-    border-radius: 20px;
-    font-size: 1.2em;
-}
 
 @media (width <= 876px){
     .top3 ul{

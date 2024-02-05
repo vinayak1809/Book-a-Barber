@@ -26,7 +26,9 @@ const SalonsPage = () => {
       <Header />
       <div className="salons-page">
         <div className="category">
-          <label htmlFor="services">Choose a Service :</label>
+          <label className="choose-ser" htmlFor="services">
+            Choose a Service :
+          </label>
           <select
             name="services"
             id="services"
