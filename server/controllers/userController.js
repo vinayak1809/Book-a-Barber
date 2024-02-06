@@ -11,6 +11,17 @@ const registerUser = catchAsyncErrors(async (req, res, next) => {
   res.status(201).json({ user: user, success: true });
 });
 
+const updateUser = catchAsyncErrors(async (req, res) => {
+  console.log(req.body.fullname, req.user._id);
+  const user = await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { ...req.body },
+    { new: true }
+  );
+
+  res.status(201).json({ user: user, success: true });
+});
+
 const checkLoginDetails = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email }).select("+password");
@@ -52,6 +63,7 @@ const logout = catchAsyncErrors(async (req, res, next) => {
 
 module.exports = {
   registerUser,
+  updateUser,
   checkLoginDetails,
   checkForUser_Token,
   logout,

@@ -8,6 +8,16 @@ const registerSalon = async (req, res) => {
   res.status(201).json({ success: true });
 };
 
+const updateSalonDetails = async (req, res) => {
+  const salonDetails = await Barber.findOneAndUpdate(
+    { userID: req.user._id },
+    { ...req.body },
+    { new: true }
+  );
+
+  res.status(201).json({ currentSalon: [salonDetails], success: true });
+};
+
 const getAllSalonDetails = catchAsyncErrors(async (req, res) => {
   const salons = await Barber.find().populate({
     path: "userID",
@@ -101,6 +111,7 @@ const getAllSalonSchedules = catchAsyncErrors(async (req, res) => {
 
 module.exports = {
   registerSalon,
+  updateSalonDetails,
   getAllSalonDetails,
   getSpecificSalonDetails_ID,
   getSpecificSalonDetails_SalonName,
