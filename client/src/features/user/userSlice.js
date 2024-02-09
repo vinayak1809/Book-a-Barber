@@ -25,6 +25,24 @@ export const createUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (userDetails) => {
+    try {
+      const response = await axios.put(
+        "http://localhost:4000/update-user",
+        userDetails,
+        {
+          withCredentials: true,
+        }
+      );
+      return { ...response.data, error: "" };
+    } catch (error) {
+      return { error: "Unable to Update User" };
+    }
+  }
+);
+
 export const checkLoginDetails = createAsyncThunk(
   "user/checkLoginDetails",
   async (userDetails) => {
@@ -101,6 +119,9 @@ export const userSlice = createSlice({
   extraReducers: {
     [createUser.fulfilled]: (state, action) => {
       return;
+    },
+    [updateUser.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
     },
     [checkLoginDetails.pending]: (state, action) => {
       state.error = "";

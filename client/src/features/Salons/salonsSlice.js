@@ -27,6 +27,23 @@ export const registerSalon = createAsyncThunk(
   }
 );
 
+export const updateSalon = createAsyncThunk(
+  "user/updateSalon",
+  async (salonDetails) => {
+    console.log("here in salondetails", salonDetails);
+    try {
+      const response = await axios.put(
+        "http://localhost:4000/update-salon",
+        salonDetails
+      );
+      console.log(response.data, "updateSalondata");
+      return { ...response.data, error: "" };
+    } catch {
+      return { error: "Unable to update Salon Details" };
+    }
+  }
+);
+
 export const getAllSalonsDetails = createAsyncThunk(
   "salons/getAllSalonsDetails", //type name
   async () => {
@@ -51,6 +68,7 @@ export const getSpecificSalonDetails_ID = createAsyncThunk(
         { withCredentials: true }
       );
 
+      console.log(response.data, "salon ID");
       return { ...response.data, error: "" };
     } catch (error) {
       return { error: "Something went wrong" };
@@ -110,6 +128,9 @@ export const salonsSlice = createSlice({
   name: "salons",
   initialState,
   extraReducers: {
+    [updateSalon.fulfilled]: (state, action) => {
+      return { ...state, ...action.payload };
+    },
     [getAllSalonsDetails.fulfilled]: (state, action) => {
       return { ...state, ...action.payload };
     },
