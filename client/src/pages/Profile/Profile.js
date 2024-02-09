@@ -1,157 +1,126 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import CreateSchedules from "../../components/Create-Schedules/CreateSchedules";
 
-import dayjs from "dayjs";
-import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-
-import {
-  registerSalonSchedules,
-  updateSalonSchedules,
-} from "../../features/services/servicesSlice";
-import { getAllSalonSchedules } from "../../features/Salons/salonsSlice";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateSalon } from "../../features/Salons/salonsSlice";
+import { updateUser } from "../../features/user/userSlice";
 
 const Profile = () => {
-  const tomorrow = dayjs().add(7, "day");
-
-  const { currentSalon, schedules } = useSelector((state) => state.salons);
-
-  const [date, setDate] = useState({ $d: "" });
-  const [times, setTimes] = useState([]);
-  const [checkExistingDate, setCheckExistingDate] = useState(false);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllSalonSchedules(currentSalon[0]._id));
-  }, []);
+  const { user } = useSelector((state) => state.user);
+  const { currentSalon } = useSelector((state) => state.salons);
 
-  //trying to retrive the particular date record when we clicked on particular date
-  useEffect(() => {
-    if (schedules.length > 0) {
-      const n = schedules[0].dayTime.filter((dateTime) => {
-        return new Date(dateTime.date).toString() == date.$d.toString();
-      });
+  const [name, setName] = useState(user.fullname);
+  const [salonName, setSalonName] = useState(currentSalon[0].name);
+  const [about, setAbout] = useState(currentSalon[0].about);
+  const [time, setTime] = useState(currentSalon[0].time);
+  const [address, setAddress] = useState(currentSalon[0].address);
+  const [location, setLocation] = useState(currentSalon[0].location);
+  const [schedules, setSchedules] = useState(currentSalon[0].Schedules);
 
-      if (Object.keys(n).length > 0) {
-        setCheckExistingDate(true);
-        setTimes(n[0].time);
-      } else {
-        setCheckExistingDate(false);
-        setTimes([]);
-      }
-    }
-  }, [date]);
+  const [changeName, setChangeName] = useState(false);
+  const [changeSalonDetails, setchangeSalonDetails] = useState(false);
 
-  const addTime = (currentTime) => {
-    var check = true;
-
-    if (times.length < 1) {
-      setTimes([{ time: currentTime, isBooked: false }]);
-    } else {
-      times.map((time) => {
-        if (time.time === currentTime.toString()) {
-          return (check = false);
-        }
-      });
-    }
-
-    if (check) {
-      setTimes([...times, { time: currentTime.toString(), isBooked: false }]);
-    }
-
-    //alternate code on above 3-4 line
-    // if (!times.includes(currentTime)) {
-    //   setTimes([...times, currentTime]);
-    // }
-  };
-
-  const remove = (removetime) => {
-    const newTimes = times.filter((time) => {
-      return time !== removetime;
-    });
-    setTimes(newTimes);
-  };
-
-  const update = () => {
-    const schedule = {
-      date: date.$d.toString(),
-      times: times,
-      barberId: currentSalon[0]._id,
+  const pushData = async (e) => {
+    e.preventDefault();
+    const userDetails = {
+      fullname: name,
     };
 
-    checkExistingDate
-      ? dispatch(updateSalonSchedules(schedule))
-      : dispatch(registerSalonSchedules(schedule));
-  };
+    changeName
+      ? await dispatch(updateUser(userDetails))
+      : await dispatch(updateUser(userDetails));
+    await dispatch(updateSalon(userSalonDetails));
 
-  const timeFormat = (time) => {
-    function addZero(i) {
-      if (i < 10) {
-        i = "0" + i;
-      }
-      return i;
-    }
-
-    let h = addZero(new Date(time.time).getHours());
-    let m = addZero(new Date(time.time).getMinutes());
-    return h + " : " + m;
+    const userSalonDetails = {
+      name: salonName,
+      about: about,
+      time: time,
+      address: address,
+      location: location,
+      Schedules: schedules,
+    };
   };
 
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label="Select Date: "
-          date={date}
-          onAccept={(newValue) => {
-            setDate(newValue);
-          }}
-          maxDate={tomorrow}
-          disablePast
-          renderInput={(params) => <TextField {...params} />}
-        />
+      <div className="form">
+        <form action="" onSubmit={(e) => pushData(e)}>
+          <div className="textarea">
+            <ul>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={name}
+                onChange={(e) => {
+                  setChangeName(true);
+                  setName(e.target.value);
+                }}
+              ></input>
+              {user.role == "barber" && (
+                <>
+                  <input
+                    type="text"
+                    name="salon-name"
+                    id="salon-name"
+                    value={salonName}
+                    required
+                    onChange={(e) => setSalonName(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    name="about"
+                    id="about"
+                    value={about}
+                    required
+                    onChange={(e) => setAbout(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    name="address"
+                    id="address"
+                    value={address}
+                    required
+                    onChange={(e) => setAddress(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    name="time"
+                    id="time"
+                    value={time}
+                    required
+                    onChange={(e) => setTime(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    name="location"
+                    id="location"
+                    value={location}
+                    required
+                    onChange={(e) => setLocation(e.target.value)}
+                  ></input>
+                  <input
+                    type="text"
+                    name="schedule-days"
+                    id="schedule-days"
+                    value={schedules}
+                    required
+                    onChange={(e) => setSchedules(e.target.value)}
+                  ></input>
+                </>
+              )}
+            </ul>
+          </div>
 
-        <TimePicker
-          label="Select Time:"
-          onAccept={(newValue) => {
-            const customDate = new Date(newValue.$d);
-            customDate.setFullYear(
-              dayjs(date).year(),
-              dayjs(date).month(),
-              dayjs(date).date()
-            );
-
-            addTime(customDate);
-          }}
-          ampm={false}
-          minutesStep={15}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider>
-      <div>
-        {
-          <ul>
-            {times.map((time, index) => (
-              <li key={index}>
-                <p>{timeFormat(time)}</p>
-                <button onClick={() => remove(time)}>X</button>
-              </li>
-            ))}
-          </ul>
-        }
+          <button className="update-btn" type="submit">
+            Update
+          </button>
+        </form>
       </div>
-
-      <button
-        onClick={() => {
-          update();
-        }}
-      >
-        Update Schedule
-      </button>
+      <CreateSchedules />
     </>
   );
 };
