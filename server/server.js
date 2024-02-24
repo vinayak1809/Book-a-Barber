@@ -30,6 +30,22 @@ connection;
 app.use(errorMiddleware);
 app.use(cookieParser());
 
+process.on("uncaughtException", (err) => {
+  console.log(`Error ${err.message}`);
+  console.log(`Shutting down the server due to Uncaught Exception`);
+
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log(`Error : ${err.message}`);
+  console.log(`Shutting down the server due to unhandled Promise Rejection`);
+
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
 app.get("/api/getKey", (req, res) =>
   res
     .status(200)
