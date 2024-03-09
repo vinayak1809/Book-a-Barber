@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 
 export const Salons = (props) => {
   const { salons,user } = props;
+  console.log(salons,user,"salonssalonssalons")
  
   return (
   <>
     <div className="all-salons">
         <ul>
-        {
+        {salons &&
           salons.map((link,index) => (
             <Link style={{ textDecoration: 'none'}} key={index} to={user._id ? `/Salon/${user.fullname}/${link.salonID.name}` :`/Salon/${link.salonID.name}`}  state={{ salonID: link.salonID._id}} >
                 <li key={link.toString()}>

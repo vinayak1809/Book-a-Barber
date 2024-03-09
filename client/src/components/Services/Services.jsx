@@ -30,7 +30,7 @@ const Services = (props) => {
       <div className='top3'>
           <h3>Services</h3>
           <ul>
-         {services.map((link, index) => (
+         {services && services.map((link, index) => (
 
             <li className="tag" key={index}>
               <h3>{link.tag}</h3>
