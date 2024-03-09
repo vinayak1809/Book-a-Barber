@@ -20,7 +20,7 @@ const Salon = () => {
 
   useEffect(() => {
     const fetchSalonDetails = async () => {
-      await dispatch(getSpecificSalonDetails_SalonName(salonName));
+      dispatch(getSpecificSalonDetails_SalonName(salonName));
     };
 
     if (salonName) {
