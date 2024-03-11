@@ -4,10 +4,7 @@ const URI = "mongodb://localhost:27017/Book-a-barber";
 //console.log("URi", URI);
 
 const connection = mongoose
-  .connect(URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(URI)
   .then(() => {
     console.log("Database Connected!!");
   })
